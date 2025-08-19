@@ -1,23 +1,69 @@
-import React from 'react';
-import image from './../../../assets/Images/download.jpg'
+import React, { useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, EffectFade } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/effect-fade';
+import image1 from './../../../assets/Images/audio-7276511_640.jpg';
+import image2 from './../../../assets/Images/bg14.png';
+import image3 from './../../../assets/Images/download.jpg';
+
+const slidesData = [
+  {
+    image: image1,
+    title: "Upgrade your Tech Accessorize with Gadget Heaven",
+    description: "Discover latest gadgets & accessories for your daily needs.",
+    buttonText: "Shop Now",
+  },
+  {
+    image: image2,
+    title: "Cutting-edge Smartphones & Devices",
+    description: "Explore the newest smartphones and tech innovations.",
+    buttonText: "Buy Now",
+  },
+  {
+    image: image3,
+    title: "Premium Quality Gadget Accessories",
+    description: "Find the best accessories to enhance your tech experience.",
+    buttonText: "Explore",
+  },
+];
 
 const Banner = () => {
-    return (
-        <div className=''>
-            {/* 1st sectionb */}
-            <div className='bg-indigo-500 text-white pb-40 pt-20'>
-                <h1 className='text-4xl pb-4 font-bold'>Upgrade your Teach Accessorize with <br /> Gadget Heaven Accessorize </h1>
-                <p className='pb-4 textarea-md'>Lorem ipsum dolor , consectetur adipisicing  temporibus, <br />i  voluptas. Accusantium incidunt   enim facere?</p>
-                <button className='btn btn-xs rounded-3xl p-4 text-[14px] '>Shop Now</button>
-            </div>
-            {/* images */}
-            <div className='-mt-28'>
-                <img className='w-9/12 h-72 mx-auto border-t-1 border-x-1  border-white p-2' src={image} alt="" />
-            </div>
-            <h1 className='text-3xl text-center text-indigo-600 font-bold py-4'>Explore Cutting-edge Gadgets</h1>
+  const [activeIndex, setActiveIndex] = useState(0);
 
-        </div>
-    );
+  return (
+    <div className="relative w-full">
+      <Swiper
+        modules={[Autoplay, EffectFade]}
+        autoplay={{ delay: 4000, disableOnInteraction: false }}
+        loop={true}
+        effect="fade"
+        onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+        className="w-full h-[500px] md:h-[600px] relative"
+      >
+        {slidesData.map((slide, index) => (
+          <SwiperSlide key={index}>
+            <div
+              className="w-full h-full bg-cover bg-center relative flex items-center justify-center"
+              style={{ backgroundImage: `url(${slide.image})` }}
+            >
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-black/40"></div>
+
+              {/* Text Info */}
+              <div className="relative text-center text-white px-4 md:px-0 max-w-2xl">
+                <h1 className="text-3xl md:text-5xl font-bold pb-4">{slide.title}</h1>
+                <p className="text-md md:text-lg pb-4">{slide.description}</p>
+                <button className="bg-indigo-600 hover:bg-indigo-700 px-6 py-2 rounded-full text-sm md:text-lg transition">
+                  {slide.buttonText}
+                </button>
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
+  );
 };
 
 export default Banner;
