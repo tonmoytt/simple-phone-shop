@@ -54,7 +54,7 @@ const Root = () => {
   };
 
   return (
-    <div>
+    <div className='bg-gradient-to-r from-indigo-300 via-purple-500 to-pink-500'>
       <Toaster position="top-center" reverseOrder={false} />
       <Navbar cartCount={cartCount} Wishlist={Wishlist} />
 

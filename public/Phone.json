@@ -10,6 +10,7 @@
     "rom": "256GB",
     "brand": "Samsung",
     "device": "phone",
+    "releaseDate": "2024-02-15",
     "image": "https://i.ibb.co/C3ppN4tP/1p.jpg"
   },
   {
@@ -23,7 +24,20 @@
     "rom": "1TB",
     "brand": "Apple",
     "device": "laptop",
+    "releaseDate": "2023-11-20",
     "image": "https://i.ibb.co/FqwYZJTv/1l.jpg"
+  },
+  {
+    "id": 21,
+    "name": "Apple Watch Series 9",
+    "about": "Latest Apple smartwatch with fitness tracking, ECG, and always-on Retina display.",
+    "price": 499,
+    "rating": 4.9,
+    "model": "A2766",
+    "brand": "Apple",
+    "device": "watch",
+    "releaseDate": "2023-09-22",
+    "image": "https://i.ibb.co.com/zWbk7cNX/download.jpg"
   },
   {
     "id": 3,
@@ -34,7 +48,20 @@
     "model": "A2931",
     "brand": "Apple",
     "device": "earbuds",
+    "releaseDate": "2023-09-18",
     "image": "https://i.ibb.co/S75dHVP0/1a.jpg"
+  },
+  {
+    "id": 22,
+    "name": "Samsung Galaxy Watch 6",
+    "about": "Premium Samsung smartwatch with AMOLED display, heart rate monitoring, and long battery life.",
+    "price": 399,
+    "rating": 4.7,
+    "model": "SM-R930",
+    "brand": "Samsung",
+    "device": "watch",
+    "releaseDate": "2023-08-15",
+    "image": "https://i.ibb.co.com/35qqC2fR/Samsung-Galaxy-Watch-5-Pro.jpg"
   },
   {
     "id": 4,
@@ -47,6 +74,7 @@
     "rom": "256GB",
     "brand": "Apple",
     "device": "phone",
+    "releaseDate": "2023-09-22",
     "image": "https://i.ibb.co/zHnYv74N/2p.jpg"
   },
   {
@@ -60,7 +88,20 @@
     "rom": "1TB",
     "brand": "HP",
     "device": "laptop",
+    "releaseDate": "2023-08-10",
     "image": "https://i.ibb.co/fdGgzCC3/3l.jpg"
+  },
+  {
+    "id": 23,
+    "name": "Garmin Fenix 7",
+    "about": "Rugged smartwatch for outdoor activities, GPS navigation, and heart rate monitoring.",
+    "price": 699,
+    "rating": 4.8,
+    "model": "010-02541-01",
+    "brand": "Garmin",
+    "device": "watch",
+    "releaseDate": "2023-06-10",
+    "image": "https://i.ibb.co.com/BHRqZnjL/Fossil-Gen-7.jpg"
   },
   {
     "id": 6,
@@ -71,6 +112,7 @@
     "model": "WF-1000XM5/B",
     "brand": "Sony",
     "device": "earbuds",
+    "releaseDate": "2023-07-25",
     "image": "https://i.ibb.co/fYMHB9SD/3a.jpg"
   },
   {
@@ -84,7 +126,20 @@
     "rom": "512GB",
     "brand": "OnePlus",
     "device": "phone",
+    "releaseDate": "2024-01-10",
     "image": "https://i.ibb.co/ksF9TKvm/3p.jpg"
+  },
+  {
+    "id": 24,
+    "name": "Fossil Gen 7",
+    "about": "Stylish Fossil smartwatch with Wear OS, fitness tracking, and customizable watch faces.",
+    "price": 299,
+    "rating": 4.5,
+    "model": "FTW8096",
+    "brand": "Fossil",
+    "device": "watch",
+    "releaseDate": "2023-04-20",
+    "image": "https://i.ibb.co.com/BHRqZnjL/Fossil-Gen-7.jpg"
   },
   {
     "id": 8,
@@ -95,6 +150,7 @@
     "model": "SM-R510",
     "brand": "Samsung",
     "device": "earbuds",
+    "releaseDate": "2023-08-28",
     "image": "https://i.ibb.co/prxpkL4f/2a.jpg"
   },
   {
@@ -108,7 +164,20 @@
     "rom": "1TB",
     "brand": "Dell",
     "device": "laptop",
+    "releaseDate": "2024-03-01",
     "image": "https://i.ibb.co/99V8V2vD/2l.webp"
+  },
+  {
+    "id": 25,
+    "name": "Apple Watch SE 2nd Gen",
+    "about": "Affordable Apple smartwatch with core fitness features and smooth performance.",
+    "price": 249,
+    "rating": 4.6,
+    "model": "A2726",
+    "brand": "Apple",
+    "device": "watch",
+    "releaseDate": "2023-09-22",
+    "image": "https://i.ibb.co.com/V07Wn153/Samsung-Galaxy-Watch-6.jpg"
   },
   {
     "id": 10,
@@ -121,6 +190,7 @@
     "rom": "256GB",
     "brand": "Xiaomi",
     "device": "phone",
+    "releaseDate": "2023-12-15",
     "image": "https://i.ibb.co/NgRZ1Ywt/4p.jpg"
   },
   {
@@ -134,19 +204,33 @@
     "rom": "1TB",
     "brand": "Lenovo",
     "device": "laptop",
+    "releaseDate": "2023-06-05",
     "image": "https://i.ibb.co/fVR9RMT3/4l.jpg"
+  },
+  {
+    "id": 26,
+    "name": "Samsung Galaxy Watch 5 Pro",
+    "about": "Advanced Samsung smartwatch designed for sports and outdoor use with GPS and long battery life.",
+    "price": 499,
+    "rating": 4.7,
+    "model": "SM-R925",
+    "brand": "Samsung",
+    "device": "watch",
+    "releaseDate": "2023-07-10",
+    "image": "https://i.ibb.co.com/b5SHWgM9/download-1.jpg"
   },
   {
     "id": 12,
     "name": "Google Pixel 8 Pro",
     "about": "Best-in-class software and AI-powered camera experience.",
     "price": 999,
-    "rating": 4.6,
+    "rating": 6,
     "model": "GC3VE",
     "ram": "12GB",
     "rom": "128GB",
     "brand": "Google",
     "device": "phone",
+    "releaseDate": "2023-10-12",
     "image": "https://i.ibb.co/Ngxwpfcq/5p.jpg"
   },
   {
@@ -158,6 +242,7 @@
     "model": "RMA230",
     "brand": "Realme",
     "device": "earbuds",
+    "releaseDate": "2023-05-22",
     "image": "https://i.ibb.co/4R14gnjC/4a.jpg"
   },
   {
@@ -165,12 +250,13 @@
     "name": "Realme GT 5 Pro",
     "about": "Affordable flagship killer with Snapdragon 8 Gen 3 and 240W charging.",
     "price": 649,
-    "rating": 4.4,
+    "rating": 6,
     "model": "RMX3888",
     "ram": "16GB",
     "rom": "512GB",
     "brand": "Realme",
     "device": "phone",
+    "releaseDate": "2023-12-01",
     "image": "https://i.ibb.co/k234yCZ5/6p.jpg"
   },
   {
@@ -184,6 +270,7 @@
     "rom": "1TB",
     "brand": "ASUS",
     "device": "laptop",
+    "releaseDate": "2023-07-12",
     "image": "https://i.ibb.co/DDkz61pn/5l.jpg"
   }
 ]
