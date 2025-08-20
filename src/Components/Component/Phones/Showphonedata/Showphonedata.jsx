@@ -5,10 +5,14 @@ const Showphonedata = ({ phoneprops }) => {
   const { id, name, image, price } = phoneprops;
 
   return (
-    <div className='w-full'>
-      <div className="card bg-base-100 shadow-sm flex flex-col justify-between h-full">
+    <div className="h-full">
+      <div className="card bg-base-100 shadow-md flex flex-col h-full">
         <figure className="overflow-hidden h-48 sm:h-56 md:h-60 lg:h-64">
-          <img src={image} alt={name} className="h-full w-full object-cover transition-transform duration-300 hover:scale-105" />
+          <img
+            src={image}
+            alt={name}
+            className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+          />
         </figure>
 
         <div className="p-4 flex flex-col flex-grow justify-between">
@@ -19,8 +23,8 @@ const Showphonedata = ({ phoneprops }) => {
             </p>
           </div>
 
-          <Link to={`/details/${id}`}>
-            <button className="btn btn-primary mt-4 w-full text-sm sm:text-base md:text-lg rounded-lg">
+          <Link to={`/details/${id}`} className="mt-4">
+            <button className="btn btn-primary w-full text-sm sm:text-base md:text-lg rounded-lg">
               Details
             </button>
           </Link>

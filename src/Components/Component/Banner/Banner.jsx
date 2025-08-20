@@ -39,7 +39,7 @@ const Banner = () => {
         loop={true}
         effect="fade"
         onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
-        className="w-full h-[500px] md:h-[600px] relative"
+        className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] relative"
       >
         {slidesData.map((slide, index) => (
           <SwiperSlide key={index}>
@@ -48,13 +48,17 @@ const Banner = () => {
               style={{ backgroundImage: `url(${slide.image})` }}
             >
               {/* Overlay */}
-              <div className="absolute inset-0 bg-black/40"></div>
+              <div className="absolute inset-0 bg-black/50"></div>
 
               {/* Text Info */}
-              <div className="relative text-center text-white px-4 md:px-0 max-w-2xl">
-                <h1 className="text-3xl md:text-5xl font-bold pb-4">{slide.title}</h1>
-                <p className="text-md md:text-lg pb-4">{slide.description}</p>
-                <button className="bg-indigo-600 hover:bg-indigo-700 px-6 py-2 rounded-full text-sm md:text-lg transition">
+              <div className="relative text-center text-white px-4 sm:px-6 md:px-0 max-w-2xl">
+                <h1 className="text-lg sm:text-2xl md:text-4xl lg:text-5xl font-bold pb-3 md:pb-4 leading-snug">
+                  {slide.title}
+                </h1>
+                <p className="text-sm sm:text-base md:text-lg pb-3 md:pb-4">
+                  {slide.description}
+                </p>
+                <button className="bg-indigo-600 hover:bg-indigo-700 px-4 sm:px-5 md:px-6 py-2 rounded-full text-xs sm:text-sm md:text-lg transition">
                   {slide.buttonText}
                 </button>
               </div>

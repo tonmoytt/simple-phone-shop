@@ -77,18 +77,7 @@ const Brands = () => {
         />
       </div>
 
-      {/* Info Section */}
-      <div className="text-center max-w-3xl mx-auto px-4 sm:px-6">
-        <h3 className="text-xl sm:text-2xl font-semibold mb-3">Why Choose Our Brands?</h3>
-        <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-          We partner with the world’s leading brands like{" "}
-          <span className="font-medium">Apple, Samsung, Dell, Bose</span> and
-          many more to bring you the latest technology at the best prices. All
-          our products are <span className="font-medium">100% authentic</span>,
-          come with official warranty, and include premium after-sales service
-          for your peace of mind.
-        </p>
-      </div>
+      
     </div>
   );
 };

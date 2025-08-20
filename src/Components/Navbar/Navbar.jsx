@@ -29,38 +29,35 @@ const Navbar = ({ cartCount = 0, Wishlist = 0 }) => {
 
   return (
     <div
-      className={`fixed top-0 left-0 w-full z-50 shadow-lg transition-colors duration-500 ${
-        isHome
-          ? "bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white"
-          : "bg-white text-gray-900"
-      }`}
+      className={`fixed top-0 left-0 w-full z-50 shadow-lg transition-colors duration-500 ${isHome
+        ? "bg-gradient-to-r from-indigo-400 via-purple-600 to-pink-500 text-white"
+        : "bg-white text-gray-900"
+        }`}
     >
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-3">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
         {/* Logo */}
-        <div className="flex items-center space-x-2 font-bold text-xl">
+        <div className="flex items-center space-x-1 md:space-x-3 font-bold text-2xl">
           <img
             src={logo}
             alt="logo"
-            className="w-10 h-10 rounded-full shadow-lg"
+            className="w-8 md:w-12 h-8 md:h-12 rounded-full shadow-lg"
           />
           <span
-            className={`tracking-wide ${
-              isHome ? "text-white" : "text-indigo-600"
-            }`}
+            className={`tracking-wide text-base md:text-lg font-extrabold ${isHome ? "text-white" : "text-indigo-700"
+              }`}
           >
             GadgetHeaven
           </span>
         </div>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex space-x-6 font-semibold items-center text-lg">
+        <div className="hidden md:flex space-x-8 font-semibold items-center text-lg">
           <NavLink
             to="/"
             className={({ isActive }) =>
-              `px-4 py-2 rounded-xl transition-all duration-300 ${
-                isActive
-                  ? "bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-lg scale-105"
-                  : "hover:bg-gradient-to-r hover:from-indigo-500 hover:to-purple-600 hover:text-white shadow-md border border-indigo-200"
+              `relative px-2 py-1 transition-all duration-300 text-[17px] ${isActive
+                ? "text-indigo-600 font-bold after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-full after:h-[3px] after:bg-indigo-600"
+                : "hover:text-indigo-500"
               }`
             }
           >
@@ -69,28 +66,28 @@ const Navbar = ({ cartCount = 0, Wishlist = 0 }) => {
 
           <NavLink
             to="/electronics"
-            className="flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-gradient-to-r hover:from-indigo-500 hover:to-purple-600 hover:text-white shadow-md border border-indigo-200 transition"
+            className="flex items-center gap-2 text-[17px] hover:text-purple-600 transition-all"
           >
             <FaMobileAlt /> Electronics
           </NavLink>
 
           <NavLink
             to="/fashion"
-            className="flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-gradient-to-r hover:from-indigo-500 hover:to-purple-600 hover:text-white shadow-md border border-indigo-200 transition"
+            className="flex items-center gap-2 text-[17px] hover:text-purple-600 transition-all"
           >
             <FaTshirt /> Fashion
           </NavLink>
 
           <NavLink
             to="/offers"
-            className="flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-gradient-to-r hover:from-indigo-500 hover:to-purple-600 hover:text-white shadow-md border border-indigo-200 transition"
+            className="flex items-center gap-2 text-[17px] hover:text-purple-600 transition-all"
           >
             <FaTags /> Offers
           </NavLink>
 
           <NavLink
             to="/deals"
-            className="flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-gradient-to-r hover:from-indigo-500 hover:to-purple-600 hover:text-white shadow-md border border-indigo-200 transition"
+            className="flex items-center gap-2 text-[17px] hover:text-purple-600 transition-all"
           >
             <FaStar /> Deals
           </NavLink>
@@ -99,7 +96,7 @@ const Navbar = ({ cartCount = 0, Wishlist = 0 }) => {
           <div className="relative">
             <button
               onClick={() => setOpenDropdown(!openDropdown)}
-              className="flex items-center gap-2 px-4 py-2 rounded-xl hover:bg-gradient-to-r hover:from-indigo-500 hover:to-purple-600 hover:text-white shadow-md border border-indigo-200 transition"
+              className="flex items-center gap-2 text-[17px] hover:text-purple-600 transition-all"
             >
               Categories <FaChevronDown className="ml-1 text-sm" />
             </button>
@@ -109,27 +106,48 @@ const Navbar = ({ cartCount = 0, Wishlist = 0 }) => {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="absolute top-full mt-2 w-56 bg-white text-gray-900 shadow-lg rounded-lg overflow-hidden z-40"
+                  className="absolute top-full mt-3 w-60 bg-white text-gray-900 shadow-xl rounded-xl overflow-hidden z-40"
                 >
-                  <Link to="/new" className="flex items-center gap-2 px-4 py-2 hover:bg-indigo-100">
+                  <Link
+                    to="/new"
+                    className="flex items-center gap-2 px-4 py-2 hover:bg-indigo-100"
+                  >
                     <FaTshirt /> New Products
                   </Link>
-                  <Link to="/overall" className="flex items-center gap-2 px-4 py-2 hover:bg-indigo-100">
+                  <Link
+                    to="/overall"
+                    className="flex items-center gap-2 px-4 py-2 hover:bg-indigo-100"
+                  >
                     <FaStar /> Overall
                   </Link>
-                  <Link to="/faq" className="flex items-center gap-2 px-4 py-2 hover:bg-indigo-100">
+                  <Link
+                    to="/faq"
+                    className="flex items-center gap-2 px-4 py-2 hover:bg-indigo-100"
+                  >
                     <FaInfoCircle /> FAQ
                   </Link>
-                  <Link to="/map" className="flex items-center gap-2 px-4 py-2 hover:bg-indigo-100">
+                  <Link
+                    to="/map"
+                    className="flex items-center gap-2 px-4 py-2 hover:bg-indigo-100"
+                  >
                     <FaMapMarkerAlt /> Shop Map
                   </Link>
-                  <Link to="/support" className="flex items-center gap-2 px-4 py-2 hover:bg-indigo-100">
+                  <Link
+                    to="/support"
+                    className="flex items-center gap-2 px-4 py-2 hover:bg-indigo-100"
+                  >
                     <FaPhone /> Support
                   </Link>
-                  <Link to="/trending" className="flex items-center gap-2 px-4 py-2 hover:bg-indigo-100">
+                  <Link
+                    to="/trending"
+                    className="flex items-center gap-2 px-4 py-2 hover:bg-indigo-100"
+                  >
                     <FaStar /> Trending
                   </Link>
-                  <Link to="/contact" className="flex items-center gap-2 px-4 py-2 hover:bg-indigo-100">
+                  <Link
+                    to="/contact"
+                    className="flex items-center gap-2 px-4 py-2 hover:bg-indigo-100"
+                  >
                     <FaPhone /> Contact
                   </Link>
                 </motion.div>
@@ -139,11 +157,11 @@ const Navbar = ({ cartCount = 0, Wishlist = 0 }) => {
         </div>
 
         {/* Icons + Mobile Hamburger */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2 md:space-x-6">
           {/* Cart */}
-          <div className="relative hidden md:flex">
-            <div className="bg-white w-10 h-10 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-transform duration-300">
-              <FaShoppingCart className="text-indigo-600 text-lg" />
+          <Link to='/dashboard'> <div className="relative">
+            <div className="bg-white w-6 md:w-8 h-6 md:h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-transform duration-300 cursor-pointer">
+              <FaShoppingCart className="text-indigo-600 text-base md:text-xl" />
             </div>
             {cartCount > 0 && (
               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center shadow-md animate-bounce">
@@ -151,11 +169,13 @@ const Navbar = ({ cartCount = 0, Wishlist = 0 }) => {
               </span>
             )}
           </div>
+          </Link>
 
           {/* Wishlist */}
+          <Link to='/dashboard'>
           <div className="relative hidden md:flex">
-            <div className="bg-white w-10 h-10 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-transform duration-300">
-              <FaHeart className="text-pink-500 text-lg" />
+            <div className="bg-white w-6 md:w-8 h-6 md:h-8 flex items-center justify-center rounded-full shadow-lg hover:scale-110 transition-transform duration-300 cursor-pointer">
+              <FaHeart className="text-pink-500 text-xl" />
             </div>
             {Wishlist > 0 && (
               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center shadow-md animate-bounce">
@@ -163,101 +183,172 @@ const Navbar = ({ cartCount = 0, Wishlist = 0 }) => {
               </span>
             )}
           </div>
+     </Link>
 
-          {/* Hamburger */}
-          <button
-            onClick={() => setMobileMenu(!mobileMenu)}
-            className="md:hidden text-2xl"
-          >
-            {mobileMenu ? <FaTimes /> : <FaBars />}
-          </button>
-        </div>
+        {/* Hamburger */}
+        <button
+          onClick={() => setMobileMenu(!mobileMenu)}
+          className="md:hidden text-xl"
+        >
+          {mobileMenu ? <FaTimes /> : <FaBars />}
+        </button>
       </div>
+    </div>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {mobileMenu && (
-          <motion.div
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ duration: 0.4 }}
-            className="fixed top-0 right-0 w-3/4 h-full bg-white text-gray-900 shadow-2xl p-6 z-50 flex flex-col"
-          >
-            <NavLink
-              to="/"
-              onClick={() => setMobileMenu(false)}
-              className="flex items-center gap-2 text-lg mb-2"
-            >
-              <FaHome /> Home
-            </NavLink>
-            <NavLink
-              to="/electronics"
-              onClick={() => setMobileMenu(false)}
-              className="flex items-center gap-2 text-lg mb-2"
-            >
-              <FaMobileAlt /> Electronics
-            </NavLink>
-            <NavLink
-              to="/fashion"
-              onClick={() => setMobileMenu(false)}
-              className="flex items-center gap-2 text-lg mb-2"
-            >
-              <FaTshirt /> Fashion
-            </NavLink>
-            <NavLink
-              to="/offers"
-              onClick={() => setMobileMenu(false)}
-              className="flex items-center gap-2 text-lg mb-2"
-            >
-              <FaTags /> Offers
-            </NavLink>
-            <NavLink
-              to="/deals"
-              onClick={() => setMobileMenu(false)}
-              className="flex items-center gap-2 text-lg mb-2"
-            >
-              <FaStar /> Deals
-            </NavLink>
-
-            {/* Mobile Dropdown */}
-            <div>
-              <button
-                onClick={() => setMobileDropdown(!mobileDropdown)}
-                className="flex items-center gap-2 text-lg font-semibold mb-2"
-              >
-                <FaList /> Categories <FaChevronDown />
-              </button>
-              {mobileDropdown && (
-                <div className="ml-6 flex flex-col space-y-2">
-                  <Link to="/new" onClick={() => setMobileMenu(false)} className="flex items-center gap-2">
-                    <FaTshirt /> New Products
-                  </Link>
-                  <Link to="/overall" onClick={() => setMobileMenu(false)} className="flex items-center gap-2">
-                    <FaStar /> Overall
-                  </Link>
-                  <Link to="/faq" onClick={() => setMobileMenu(false)} className="flex items-center gap-2">
-                    <FaInfoCircle /> FAQ
-                  </Link>
-                  <Link to="/map" onClick={() => setMobileMenu(false)} className="flex items-center gap-2">
-                    <FaMapMarkerAlt /> Shop Map
-                  </Link>
-                  <Link to="/support" onClick={() => setMobileMenu(false)} className="flex items-center gap-2">
-                    <FaPhone /> Support
-                  </Link>
-                  <Link to="/trending" onClick={() => setMobileMenu(false)} className="flex items-center gap-2">
-                    <FaStar /> Trending
-                  </Link>
-                  <Link to="/contact" onClick={() => setMobileMenu(false)} className="flex items-center gap-2">
-                    <FaPhone /> Contact
-                  </Link>
-                </div>
+      {/* Mobile Menu */ }
+  <AnimatePresence>
+    {mobileMenu && (
+      <motion.div
+        initial={{ x: "100%" }}
+        animate={{ x: 0 }}
+        exit={{ x: "100%" }}
+        transition={{ duration: 0.4 }}
+        className="fixed top-0 right-0 w-4/5 h-full bg-white text-gray-900 shadow-2xl z-50 flex flex-col"
+      >
+        {/* Top Section with Cart + Wishlist + Close */}
+        <div className="flex items-center justify-between px-5  py-4 border-b">
+          <h2 className="text-xl font-bold text-indigo-600">Menu</h2>
+          <div className="flex items-center gap-4">
+            {/* Cart */}
+            <div className="relative cursor-pointer">
+              <FaShoppingCart className="text-indigo-600 text-xl" />
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center shadow-md animate-bounce">
+                  {cartCount}
+                </span>
               )}
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+
+            {/* Wishlist */}
+            <div className="relative cursor-pointer">
+              <FaHeart className="text-pink-500 text-xl" />
+              {Wishlist > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center shadow-md animate-bounce">
+                  {Wishlist}
+                </span>
+              )}
+            </div>
+
+            {/* Close Button */}
+            <button
+              onClick={() => setMobileMenu(false)}
+              className="text-3xl text-gray-700 hover:text-red-500 transition"
+            >
+              <FaTimes />
+            </button>
+          </div>
+        </div>
+
+        {/* Nav Links */}
+        <div className="flex flex-col px-3 py-4 space-y-5 text-md font-medium">
+          <NavLink
+            to="/"
+            onClick={() => setMobileMenu(false)}
+            className="flex items-center gap-2 py-2 px-2 rounded-lg hover:bg-indigo-100 hover:text-indigo-600 transition"
+          >
+            <FaHome className="text-indigo-500" /> Home
+          </NavLink>
+
+          <NavLink
+            to="/electronics"
+            onClick={() => setMobileMenu(false)}
+            className="flex items-center gap-2 py-2 px-2 rounded-lg hover:bg-indigo-100 hover:text-indigo-600 transition"
+          >
+            <FaMobileAlt className="text-purple-500" /> Electronics
+          </NavLink>
+
+          <NavLink
+            to="/fashion"
+            onClick={() => setMobileMenu(false)}
+            className="flex items-center gap-2 py-2 px-2 rounded-lg hover:bg-indigo-100 hover:text-indigo-600 transition"
+          >
+            <FaTshirt className="text-pink-500" /> Fashion
+          </NavLink>
+
+          <NavLink
+            to="/offers"
+            onClick={() => setMobileMenu(false)}
+            className="flex items-center gap-2 py-2 px-2 rounded-lg hover:bg-indigo-100 hover:text-indigo-600 transition"
+          >
+            <FaTags className="text-green-500" /> Offers
+          </NavLink>
+
+          <NavLink
+            to="/deals"
+            onClick={() => setMobileMenu(false)}
+            className="flex items-center gap-2 py-2 px-2 rounded-lg hover:bg-indigo-100 hover:text-indigo-600 transition"
+          >
+            <FaStar className="text-yellow-500" /> Deals
+          </NavLink>
+
+          {/* Mobile Dropdown */}
+          <div className="mt-2">
+            <button
+              onClick={() => setMobileDropdown(!mobileDropdown)}
+              className="flex items-center gap-4 w-full py-2 px-3 rounded-lg hover:bg-indigo-100 hover:text-indigo-600 transition"
+            >
+              <FaList className="text-indigo-500" /> Categories{" "}
+              <FaChevronDown className="ml-auto" />
+            </button>
+            {mobileDropdown && (
+              <div className="ml-6 mt-3 flex flex-col space-y-4">
+                <Link
+                  to="/new"
+                  onClick={() => setMobileMenu(false)}
+                  className="flex items-center gap-2 text-sm hover:text-indigo-600"
+                >
+                  <FaTshirt className="w-3 h-3" /> New Products
+                </Link>
+                <Link
+                  to="/overall"
+                  onClick={() => setMobileMenu(false)}
+                  className="flex items-center gap-2 text-sm  hover:text-indigo-600"
+                >
+                  <FaStar className="w-3 h-3" /> Overall
+                </Link>
+                <Link
+                  to="/faq"
+                  onClick={() => setMobileMenu(false)}
+                  className="flex items-center gap-2 text-sm  hover:text-indigo-600"
+                >
+                  <FaInfoCircle className="w-3 h-3" /> FAQ
+                </Link>
+                <Link
+                  to="/map"
+                  onClick={() => setMobileMenu(false)}
+                  className="flex items-center gap-2 text-sm  hover:text-indigo-600"
+                >
+                  <FaMapMarkerAlt className="w-3 h-3" /> Shop Map
+                </Link>
+                <Link
+                  to="/support"
+                  onClick={() => setMobileMenu(false)}
+                  className="flex items-center gap-2 text-sm  hover:text-indigo-600"
+                >
+                  <FaPhone className="w-[11px] h-3" /> Support
+                </Link>
+                <Link
+                  to="/trending"
+                  onClick={() => setMobileMenu(false)}
+                  className="flex items-center gap-2 text-sm  hover:text-indigo-600"
+                >
+                  <FaStar className="w-3 h-3" /> Trending
+                </Link>
+                <Link
+                  to="/contact"
+                  onClick={() => setMobileMenu(false)}
+                  className="flex items-center gap-2 text-sm  hover:text-indigo-600"
+                >
+                  <FaPhone className="w-[11px] h-3" /> Contact
+                </Link>
+              </div>
+            )}
+          </div>
+        </div>
+      </motion.div>
+    )}
+  </AnimatePresence>
+    </div >
   );
 };
 
