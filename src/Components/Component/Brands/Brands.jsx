@@ -64,7 +64,7 @@ const Brands = () => {
       </div>
 
       {/* Promo Images */}
-      <div className="flex flex-col md:flex-row gap-6 items-center justify-center px-4 md:px-0">
+      <div className="flex flex-col md:flex-row gap-4 items-center justify-center px-4 md:px-0">
         <img
           src={promo1}
           alt="Brand promo 1"

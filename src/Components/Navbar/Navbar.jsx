@@ -14,6 +14,7 @@ import {
   FaInfoCircle,
   FaMapMarkerAlt,
   FaPhone,
+  FaUser,
 } from "react-icons/fa";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -51,7 +52,7 @@ const Navbar = ({ cartCount = 0, Wishlist = 0 }) => {
         </div>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex space-x-8 font-semibold items-center text-lg">
+        <div className="hidden md:flex space-x-4 font-semibold items-center text-lg">
           <NavLink
             to="/"
             className={({ isActive }) =>
@@ -66,37 +67,37 @@ const Navbar = ({ cartCount = 0, Wishlist = 0 }) => {
 
           <NavLink
             to="/electronics"
-            className="flex items-center gap-2 text-[17px] hover:text-purple-600 transition-all"
+            className="flex items-center gap-1 text-[17px] hover:text-purple-600 transition-all"
           >
-            <FaMobileAlt /> Electronics
+            <FaMobileAlt className="md:w-3 lg:w-4 md:h-3 lg:h-4"/> Electronics
           </NavLink>
 
           <NavLink
             to="/fashion"
-            className="flex items-center gap-2 text-[17px] hover:text-purple-600 transition-all"
+            className="flex items-center gap-1 text-[16px] hover:text-purple-600 transition-all"
           >
-            <FaTshirt /> Fashion
+            <FaTshirt  className="md:w-3 lg:w-4 md:h-3 lg:h-4"/> Fashion
           </NavLink>
 
           <NavLink
             to="/offers"
-            className="flex items-center gap-2 text-[17px] hover:text-purple-600 transition-all"
+            className="flex items-center gap-1 text-[16px] hover:text-purple-600 transition-all"
           >
-            <FaTags /> Offers
+            <FaTags  className="md:w-3 lg:w-4 md:h-3 lg:h-4"/> Offers
           </NavLink>
 
           <NavLink
             to="/deals"
-            className="flex items-center gap-2 text-[17px] hover:text-purple-600 transition-all"
+            className="flex items-center gap-1 text-[16px] hover:text-purple-600 transition-all"
           >
-            <FaStar /> Deals
+            <FaStar  className="md:w-3 lg:w-4 md:h-3 lg:h-4"/> Deals
           </NavLink>
 
           {/* Desktop Dropdown */}
           <div className="relative">
             <button
               onClick={() => setOpenDropdown(!openDropdown)}
-              className="flex items-center gap-2 text-[17px] hover:text-purple-600 transition-all"
+              className="flex items-center gap-1 text-[16px] hover:text-purple-600 transition-all"
             >
               Categories <FaChevronDown className="ml-1 text-sm" />
             </button>
@@ -106,47 +107,47 @@ const Navbar = ({ cartCount = 0, Wishlist = 0 }) => {
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className="absolute top-full mt-3 w-60 bg-white text-gray-900 shadow-xl rounded-xl overflow-hidden z-40"
+                  className="absolute top-full mt-7 w-60  text-white bg-gray-800 shadow-2xl shadow-cyan-300 rounded-xl overflow-hidden z-50 space-y-3"
                 >
                   <Link
                     to="/new"
-                    className="flex items-center gap-2 px-4 py-2 hover:bg-indigo-100"
+                    className="flex items-center gap-2 text-base px-4 py-2 hover:bg-indigo-100"
                   >
                     <FaTshirt /> New Products
                   </Link>
                   <Link
                     to="/overall"
-                    className="flex items-center gap-2 px-4 py-2 hover:bg-indigo-100"
+                    className="flex items-center gap-2 px-4 py-2 text-base hover:bg-indigo-100"
                   >
                     <FaStar /> Overall
                   </Link>
                   <Link
                     to="/faq"
-                    className="flex items-center gap-2 px-4 py-2 hover:bg-indigo-100"
+                    className="flex items-center gap-2 px-4 py-2 text-base hover:bg-indigo-100"
                   >
                     <FaInfoCircle /> FAQ
                   </Link>
                   <Link
                     to="/map"
-                    className="flex items-center gap-2 px-4 py-2 hover:bg-indigo-100"
+                    className="flex items-center gap-2 px-4 py-2 text-base hover:bg-indigo-100"
                   >
                     <FaMapMarkerAlt /> Shop Map
                   </Link>
                   <Link
                     to="/support"
-                    className="flex items-center gap-2 px-4 py-2 hover:bg-indigo-100"
+                    className="flex items-center gap-2 px-4 py-2 text-base hover:bg-indigo-100"
                   >
                     <FaPhone /> Support
                   </Link>
                   <Link
                     to="/trending"
-                    className="flex items-center gap-2 px-4 py-2 hover:bg-indigo-100"
+                    className="flex items-center gap-2 px-4 py-2 text-base hover:bg-indigo-100"
                   >
                     <FaStar /> Trending
                   </Link>
                   <Link
                     to="/contact"
-                    className="flex items-center gap-2 px-4 py-2 hover:bg-indigo-100"
+                    className="flex items-center gap-2 px-4 py-2 text-base hover:bg-indigo-100"
                   >
                     <FaPhone /> Contact
                   </Link>
@@ -184,6 +185,46 @@ const Navbar = ({ cartCount = 0, Wishlist = 0 }) => {
             )}
           </div>
      </Link>
+{/* Registration Button */}
+<Link to="/signup">
+  <div className="relative hidden md:flex">
+    <div
+      className="
+        group relative flex items-center justify-center
+        px-5 md:px-6 py-2 md:py-3
+        rounded-full
+        bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500
+        text-white font-semibold text-sm md:text-base
+        shadow-lg
+        cursor-pointer
+        overflow-hidden
+        transition-all duration-300
+        hover:scale-105 hover:shadow-2xl
+      "
+    >
+      {/* Animated Border */}
+      <span
+        className="
+          absolute inset-0 rounded-full border-2 border-white border-opacity-20
+          transition-all duration-500 group-hover:border-opacity-100
+        "
+      ></span>
+
+      {/* Hover Glow */}
+      <span
+        className="
+          absolute inset-0 rounded-full bg-white/10 opacity-0
+          group-hover:opacity-30 transition-all duration-300
+        "
+      ></span>
+
+      {/* Button Text */}
+      <span className="relative z-10">Register</span>
+    </div>
+  </div>
+</Link>
+
+
 
         {/* Hamburger */}
         <button
@@ -244,7 +285,7 @@ const Navbar = ({ cartCount = 0, Wishlist = 0 }) => {
           <NavLink
             to="/"
             onClick={() => setMobileMenu(false)}
-            className="flex items-center gap-2 py-2 px-2 rounded-lg hover:bg-indigo-100 hover:text-indigo-600 transition"
+            className="flex items-center  gap-2 py-2 px-2 rounded-lg hover:bg-indigo-100 hover:text-indigo-600 transition"
           >
             <FaHome className="text-indigo-500" /> Home
           </NavLink>
@@ -280,6 +321,10 @@ const Navbar = ({ cartCount = 0, Wishlist = 0 }) => {
           >
             <FaStar className="text-yellow-500" /> Deals
           </NavLink>
+          
+
+
+           
 
           {/* Mobile Dropdown */}
           <div className="mt-2">
@@ -295,55 +340,95 @@ const Navbar = ({ cartCount = 0, Wishlist = 0 }) => {
                 <Link
                   to="/new"
                   onClick={() => setMobileMenu(false)}
-                  className="flex items-center gap-2 text-sm hover:text-indigo-600"
+                  className="flex font-normal items-center gap-2 text-sm hover:text-indigo-600"
                 >
-                  <FaTshirt className="w-3 h-3" /> New Products
+                  <FaTshirt className="w-3 h-3 text-gray-600" /> New Products
                 </Link>
                 <Link
                   to="/overall"
                   onClick={() => setMobileMenu(false)}
-                  className="flex items-center gap-2 text-sm  hover:text-indigo-600"
+                  className="flex font-normal items-center gap-2 text-sm  hover:text-indigo-600"
                 >
-                  <FaStar className="w-3 h-3" /> Overall
+                  <FaStar className="w-3 h-3 text-gray-600" /> Overall
                 </Link>
                 <Link
                   to="/faq"
                   onClick={() => setMobileMenu(false)}
-                  className="flex items-center gap-2 text-sm  hover:text-indigo-600"
+                  className="flex font-normal items-center gap-2 text-sm  hover:text-indigo-600"
                 >
-                  <FaInfoCircle className="w-3 h-3" /> FAQ
+                  <FaInfoCircle className="w-3 h-3 text-gray-600" /> FAQ
                 </Link>
                 <Link
                   to="/map"
                   onClick={() => setMobileMenu(false)}
-                  className="flex items-center gap-2 text-sm  hover:text-indigo-600"
+                  className="flex font-normal items-center gap-2 text-sm  hover:text-indigo-600"
                 >
-                  <FaMapMarkerAlt className="w-3 h-3" /> Shop Map
+                  <FaMapMarkerAlt className="w-3 h-3 text-gray-600" /> Shop Map
                 </Link>
                 <Link
                   to="/support"
                   onClick={() => setMobileMenu(false)}
-                  className="flex items-center gap-2 text-sm  hover:text-indigo-600"
+                  className="flex font-normal items-center gap-2 text-sm  hover:text-indigo-600"
                 >
-                  <FaPhone className="w-[11px] h-3" /> Support
+                  <FaPhone className="w-[11px] h-3 text-gray-600" /> Support
                 </Link>
                 <Link
                   to="/trending"
                   onClick={() => setMobileMenu(false)}
-                  className="flex items-center gap-2 text-sm  hover:text-indigo-600"
+                  className="flex font-normal items-center gap-2 text-sm  hover:text-indigo-600"
                 >
-                  <FaStar className="w-3 h-3" /> Trending
+                  <FaStar className="w-3 h-3 text-gray-600" /> Trending
                 </Link>
                 <Link
                   to="/contact"
                   onClick={() => setMobileMenu(false)}
-                  className="flex items-center gap-2 text-sm  hover:text-indigo-600"
+                  className="flex font-normal items-center gap-2 text-sm  hover:text-indigo-600"
                 >
-                  <FaPhone className="w-[11px] h-3" /> Contact
+                  <FaPhone className="w-[11px] h-3 text-gray-600" /> Contact
                 </Link>
               </div>
             )}
           </div>
+{/* signup */}
+          <NavLink
+  to="/signup"
+  onClick={() => setMobileMenu(false)}
+  className="flex justify-center w-full"
+>
+  <div
+    className="
+      group relative flex items-center justify-center
+      w-full px-5 py-2 rounded-full
+      bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500
+      text-white font-semibold text-sm
+      shadow-md
+      cursor-pointer
+      overflow-hidden
+      transition-all duration-300
+      hover:scale-105 hover:shadow-xl
+    "
+  >
+    {/* Animated Border */}
+    <span
+      className="
+        absolute inset-0 rounded-full border-2 border-white border-opacity-20
+        transition-all duration-500 group-hover:border-opacity-100
+      "
+    ></span>
+
+    {/* Hover Glow */}
+    <span
+      className="
+        absolute inset-0 rounded-full bg-white/10 opacity-0
+        group-hover:opacity-30 transition-all duration-300
+      "
+    ></span>
+
+    {/* Button Text */}
+    <span className="relative z-10">Register</span>
+  </div>
+</NavLink>
+          
         </div>
       </motion.div>
     )}
