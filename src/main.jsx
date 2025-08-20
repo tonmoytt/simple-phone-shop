@@ -11,6 +11,9 @@ import Error from './Components/Error/Error.jsx';
 import Home from './Components/Component/Home/Home.jsx';
 import DetailsData from './Components/Component/Phones/Showphonedata/DetailsData/DetailsData.jsx';
 import Dashboard from './Components/Component/Phones/Showphonedata/DetailsData/Dashboard/Dashboard.jsx';
+import Electronics from './Components/Component/Pages/Electronics/Electronics.jsx';
+import FashionPage from './Components/Component/Pages/Electronics/FashionPage/FashionPage.jsx';
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -30,7 +33,15 @@ const router = createBrowserRouter([
       {
         path:'/dashboard',
         element: <Dashboard></Dashboard>
-      }
+      },
+      {
+        path:'/electronics',
+        element: <Electronics></Electronics>
+      },
+      {
+        path:'/fashion',
+        element: <FashionPage></FashionPage>
+      },
 
     ]
   },
