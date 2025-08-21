@@ -1,81 +1,153 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { FaFacebookF, FaTwitter, FaYoutube, FaLinkedinIn, FaInstagram } from 'react-icons/fa';
+import React from "react";
+import { Link } from "react-router-dom";
+import {
+  FaFacebookF,
+  FaTwitter,
+  FaYoutube,
+  FaLinkedinIn,
+  FaInstagram,
+  FaPhoneAlt,
+  FaEnvelope,
+  FaMapMarkerAlt,
+} from "react-icons/fa";
+import { motion } from "framer-motion";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-gray-200 pt-12">
-      {/* Top Section: Logo + About + Newsletter */}
-      <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        
+    <motion.footer
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      viewport={{ once: true }}
+      className="relative bg-gradient-to-br from-gray-900 via-gray-800 to-black text-gray-300 pt-16 overflow-hidden"
+    >
+      {/* Glow background animation */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,#9333ea,transparent_70%)] opacity-20 animate-pulse"></div>
+
+      {/* Main Grid */}
+      <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 relative z-10">
         {/* Logo + About */}
-        <div className="flex flex-col">
-          <h2 className="text-2xl font-bold text-white mb-3">GadgetHeaven</h2>
-          <p className="text-gray-400 mb-4">
-            Leading the way in innovative tech solutions since 1992. We provide reliable devices, accessories, and cutting-edge gadgets.
+        <div>
+          <h2 className="text-3xl font-extrabold text-white mb-4 tracking-wide">
+            Gadget<span className="text-purple-400">Heaven</span>
+          </h2>
+          <p className="text-gray-400 leading-relaxed text-sm">
+            🚀 Since 1992, delivering innovative tech solutions, futuristic
+            gadgets & accessories you can rely on.
           </p>
-          <div className="flex gap-3 mt-2">
-            <a href="#" className="p-2 rounded-full bg-blue-600 hover:bg-blue-700 transition"><FaFacebookF /></a>
-            <a href="#" className="p-2 rounded-full bg-sky-400 hover:bg-sky-500 transition"><FaTwitter /></a>
-            <a href="#" className="p-2 rounded-full bg-red-600 hover:bg-red-700 transition"><FaYoutube /></a>
-            <a href="#" className="p-2 rounded-full bg-blue-800 hover:bg-blue-900 transition"><FaLinkedinIn /></a>
-            <a href="#" className="p-2 rounded-full bg-pink-500 hover:bg-pink-600 transition"><FaInstagram /></a>
+          <div className="flex gap-3 mt-6">
+            {[
+              { icon: <FaFacebookF />, color: "hover:bg-blue-600" },
+              { icon: <FaTwitter />, color: "hover:bg-sky-400" },
+              { icon: <FaYoutube />, color: "hover:bg-red-600" },
+              { icon: <FaLinkedinIn />, color: "hover:bg-blue-700" },
+              { icon: <FaInstagram />, color: "hover:bg-pink-500" },
+            ].map((s, i) => (
+              <motion.a
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+                key={i}
+                href="#"
+                className={`p-3 rounded-full bg-white/10 backdrop-blur-md hover:shadow-lg hover:shadow-${s.color} transition-all duration-300 ${s.color}`}
+              >
+                {s.icon}
+              </motion.a>
+            ))}
           </div>
         </div>
 
         {/* Quick Links */}
-        <div className='hidden md:block text-start'>
-          <h3 className="text-xl font-semibold text-white mb-4">Quick Links</h3>
-          <ul className="space-y-2 text-gray-400">
-            <li><Link to="/" className="hover:text-white transition">Home</Link></li>
-            <li><Link to="/about" className="hover:text-white transition">About Us</Link></li>
-            <li><Link to="/shop" className="hover:text-white transition">Shop</Link></li>
-            <li><Link to="/contact" className="hover:text-white transition">Contact</Link></li>
-            <li><Link to="/blog" className="hover:text-white transition">Blog</Link></li>
-            <li><Link to="/faq" className="hover:text-white transition">FAQ</Link></li>
+        <div className="md:mt-14">
+          <h3 className="text-xl font-semibold text-white mb-5">
+            Quick Links
+          </h3>
+          <ul className="space-x-2 text-gray-400 text-sm flex ">
+            {[
+              { name: "Home", path: "/" },
+              { name: "About", path: "/about" },
+              { name: "Shop", path: "/shop" },
+              { name: "Contact", path: "/contact" },
+              { name: "Blog", path: "/blog" },
+              { name: "FAQ", path: "/faq" },
+            ].map((link, i) => (
+              <li key={i}>
+                <Link
+                  to={link.path}
+                  className="hover:text-purple-400 hover:underline hover:translate-x-1 inline-block transition-all duration-300"
+                >
+                  {link.name}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
 
-        {/* Newsletter + Contact */}
-        <div className="flex flex-col">
-          <h3 className="text-xl font-semibold text-white mb-4">Newsletter</h3>
-          <p className="text-gray-400 mb-3">Subscribe to our newsletter for latest updates and exclusive offers.</p>
-          <form className="flex flex-col sm:flex-row gap-2">
-            <input 
-              type="email" 
-              placeholder="Enter your email" 
-              className="p-2 rounded-md flex-1 focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 w-full"
+        {/* Newsletter */}
+        <div>
+          <h3 className="text-xl font-semibold text-white mb-5">Newsletter</h3>
+          <p className="text-gray-400 mb-4 text-sm">
+            Get latest updates & offers right in your inbox.
+          </p>
+          <form className="flex flex-col sm:flex-row gap-3">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="px-4 py-3 rounded-xl w-full bg-white/10 text-gray-100 border-1 border-purple-400 focus:outline-none focus:ring-2 focus:ring-purple-500 backdrop-blur-md placeholder-gray-400 text-sm"
             />
-            <button 
-              type="submit" 
-              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition w-full sm:w-auto"
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              type="submit"
+              className="px-6 py-3 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold shadow-lg hover:shadow-purple-500/50 transition"
             >
               Subscribe
-            </button>
+            </motion.button>
           </form>
+        </div>
 
-          <div className="mt-6">
-            <h3 className="text-xl font-semibold text-white mb-2">Contact</h3>
-            <p className="text-gray-400">123 Tech Avenue, Silicon Valley, CA</p>
-            <p className="text-gray-400">Phone: +1 234 567 890</p>
-            <p className="text-gray-400">Email: support@gadgetheaven.com</p>
-          </div>
+        {/* Contact */}
+        <div>
+          <h3 className="text-xl font-semibold text-white mb-5">Contact Us</h3>
+          <ul className="space-y-3 text-gray-400 text-sm">
+            <li className="flex items-center gap-3">
+              <FaMapMarkerAlt className="text-purple-400" /> 123 Tech Avenue,
+              Silicon Valley
+            </li>
+            <li className="flex items-center gap-3">
+              <FaPhoneAlt className="text-purple-400" /> +1 234 567 890
+            </li>
+            <li className="flex items-center gap-3">
+              <FaEnvelope className="text-purple-400" /> support@gadgetheaven.com
+            </li>
+          </ul>
         </div>
       </div>
 
       {/* Divider */}
-      <div className="border-t border-gray-700 my-8"></div>
+      <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-gray-700 to-transparent my-10"></div>
 
-      {/* Bottom Section: Legal + Payments */}
-      <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm gap-4 md:gap-0">
+      {/* Bottom Section */}
+      <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-center text-gray-500 text-xs sm:text-sm relative z-10">
         <p>© 2025 GadgetHeaven. All rights reserved.</p>
-        <div className="flex gap-4">
-          <img src="https://www.svgrepo.com/show/303279/visa-logo.svg" alt="Visa" className="h-6"/>
-          <img src="https://www.svgrepo.com/show/303263/mastercard-logo.svg" alt="MasterCard" className="h-6"/>
-          <img src="https://www.svgrepo.com/show/303275/paypal.svg" alt="PayPal" className="h-6"/>
+        <div className="flex gap-4 mt-3 md:mt-0">
+          <img
+            src="https://www.svgrepo.com/show/303279/visa-logo.svg"
+            alt="Visa"
+            className="h-6"
+          />
+          <img
+            src="https://www.svgrepo.com/show/303263/mastercard-logo.svg"
+            alt="MasterCard"
+            className="h-6"
+          />
+          <img
+            src="https://www.svgrepo.com/show/303275/paypal.svg"
+            alt="PayPal"
+            className="h-6"
+          />
         </div>
       </div>
-    </footer>
+    </motion.footer>
   );
 };
 

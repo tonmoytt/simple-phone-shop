@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   FaHeart,
   FaShoppingCart,
@@ -16,17 +16,54 @@ import {
   FaPhone,
   FaUser,
 } from "react-icons/fa";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "../../assets/Images/modern-gradient-gadget-store-logo-tech-brand_8169-752 (1).avif";
+import { Authmainprovider } from "../Authincation/AuthProvider/Authincation";
+import Swal from "sweetalert2";
+import auth from "../Authincation/AuthProvider/Firebase/Firebase.init";
 
 const Navbar = ({ cartCount = 0, Wishlist = 0 }) => {
   const location = useLocation();
   const isHome = location.pathname === "/";
 
+  const {user, SingOutLog} =useContext(Authmainprovider)
+  const navigate =useNavigate()
+
   const [openDropdown, setOpenDropdown] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
   const [mobileDropdown, setMobileDropdown] = useState(false);
+
+  const handleLogout = (onSuccess) => {
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You will be logged out!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, logout!",
+    cancelButtonText: "Cancel",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      SingOutLog(auth)
+        .then(() => {
+          Swal.fire("Success!", "Successfully logged out!", "success");
+          
+          // Safe call onSuccess only if it's a function
+          if (typeof onSuccess === "function") {
+            onSuccess();
+          }
+
+          navigate("/");
+        })
+        .catch((error) => {
+          console.error(error);
+          Swal.fire("Error!", "Failed to log out!", "error");
+        });
+    }
+  });
+};
 
   return (
     <div
@@ -186,7 +223,7 @@ const Navbar = ({ cartCount = 0, Wishlist = 0 }) => {
           </div>
      </Link>
 {/* Registration Button */}
-<Link to="/signup">
+ 
   <div className="relative hidden md:flex">
     <div
       className="
@@ -219,10 +256,18 @@ const Navbar = ({ cartCount = 0, Wishlist = 0 }) => {
       ></span>
 
       {/* Button Text */}
-    <Link to='/signup'></Link>  <span className="relative z-10">Register</span>
+
+      {
+        user ? <button onClick={handleLogout}><span className="relative z-10 cursor-pointer">Signout</span> </button> 
+        : 
+        <Link to='/signup'> <span className="relative z-10">Register</span> </Link> 
+      }
+    
+
+
     </div>
   </div>
-</Link>
+ 
 
 
 
@@ -391,7 +436,7 @@ const Navbar = ({ cartCount = 0, Wishlist = 0 }) => {
           </div>
 {/* signup */}
           <NavLink
-  to="/signup"
+  
   onClick={() => setMobileMenu(false)}
   className="flex justify-center w-full"
 >
@@ -425,7 +470,14 @@ const Navbar = ({ cartCount = 0, Wishlist = 0 }) => {
     ></span>
 
     {/* Button Text */}
-    <span className="relative z-10">Register</span>
+  {/* Button Text */}
+
+      {
+        user ? <button onClick={handleLogout}><span className="relative z-10 cursor-pointer">Signout</span> </button> 
+        : 
+        <Link to='/signup'> <span className="relative z-10">Register</span> </Link> 
+      }
+
   </div>
 </NavLink>
           

@@ -18,13 +18,14 @@ import AllOfferd from './Components/Component/Pages/Electronics/Offerd/AllOfferd
 import DealsPage from './Components/Component/Pages/Electronics/Deals/Deals.jsx';
 import Register from './Components/Authincation/AuthProvider/Register/Register.jsx';
 import Login from './Components/Authincation/AuthProvider/Login/Login.jsx';
+import Authincation from './Components/Authincation/AuthProvider/Authincation.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
     // errorElement: <Error></Error>,
-    children:[
+    children: [
       {
         path: '/',
         element: <Home></Home>
@@ -33,18 +34,18 @@ const router = createBrowserRouter([
         path: '/details/:id',
         element: <DetailsData></DetailsData>,
         loader: () => fetch('/Phone.json')
-        
+
       },
       {
-        path:'/dashboard',
+        path: '/dashboard',
         element: <Dashboard></Dashboard>
       },
       {
-        path:'/electronics',
+        path: '/electronics',
         element: <Electronics></Electronics>
       },
       {
-        path:'/fashion',
+        path: '/fashion',
         element: <FashionPage></FashionPage>
       },
       // {
@@ -52,19 +53,19 @@ const router = createBrowserRouter([
       //   element: <Offerd></Offerd>
       // },
       {
-        path:'/offers',
+        path: '/offers',
         element: <AllOfferd></AllOfferd>
       },
       {
-        path:'/deals',
+        path: '/deals',
         element: <DealsPage></DealsPage>
       },
       {
-        path:'/signup',
+        path: '/signup',
         element: <Register></Register>
       },
       {
-        path:'/login',
+        path: '/login',
         element: <Login></Login>
       },
 
@@ -74,6 +75,9 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <Authincation>
+      <RouterProvider router={router} />
+    </Authincation>
+
   </StrictMode>,
 )

@@ -70,7 +70,7 @@ const Root = () => {
           Handledeleteditems,
         }}
       />
-
+<Footer></Footer>
     
     </div>
   );
