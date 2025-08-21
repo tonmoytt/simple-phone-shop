@@ -69,7 +69,7 @@ const Root = () => {
         }}
       />
 
-      <Footer />
+    
     </div>
   );
 };

@@ -1,166 +1,296 @@
-import React, { useState, useEffect } from "react";
-import SectionTitle from "../../../Phones/SectionTitle/SectionTitle";
-import Showphonedata from "../../../Phones/Showphonedata/Showphonedata";
- 
+import { div } from "framer-motion/client";
+import React, { useEffect, useState } from "react";
+import banner from '../../../../../assets/Logo/laptop-headphones-red-background_253401-4823.avif'
+import { motion } from "framer-motion"; 
 
 const FashionPage = () => {
-  const [items, setItems] = useState([]);
-  const [filteredItems, setFilteredItems] = useState([]);
-  const [visibleCount, setVisibleCount] = useState(12);
+    const [data, setData] = useState([]);
 
-  const [brands, setBrands] = useState([]);
-  const [maxPrice, setMaxPrice] = useState(2000);
-  const [sortBy, setSortBy] = useState("default");
+    useEffect(() => {
+        fetch("/Phone.json")
+            .then((res) => res.json())
+            .then((resData) => setData(resData))
+            .catch((err) => console.error("Error loading data:", err));
+    }, []);
 
-  // Particle offsets for parallax
-  const [topParticleOffsets, setTopParticleOffsets] = useState([]);
-  const [bottomParticleOffsets, setBottomParticleOffsets] = useState([]);
-
-  useEffect(() => {
-    fetch("/Phone.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setItems(data);
-        setFilteredItems(data);
-      });
-  }, []);
-
-  useEffect(() => {
-    let filtered = [...items];
-
-    if (brands.length > 0) filtered = filtered.filter(d => brands.includes(d.brand));
-    filtered = filtered.filter(d => d.price <= maxPrice);
-
-    if (sortBy === "low-high") filtered.sort((a,b) => a.price - b.price);
-    else if (sortBy === "high-low") filtered.sort((a,b) => b.price - a.price);
-    else if (sortBy === "newest") filtered.sort((a,b) => new Date(b.releaseDate) - new Date(a.releaseDate));
-
-    setFilteredItems(filtered);
-  }, [brands, maxPrice, sortBy, items]);
-
-  const handleBrandChange = (brand) => {
-    setBrands(prev => prev.includes(brand) ? prev.filter(b => b !== brand) : [...prev, brand]);
-  };
-
-  const handleShowAll = () => setVisibleCount(filteredItems.length);
-
-  // Initialize particle offsets
-  useEffect(() => {
-    setTopParticleOffsets([...Array(15)].map(() => Math.random() * 100));
-    setBottomParticleOffsets([...Array(15)].map(() => Math.random() * 100));
-  }, []);
-
-  // Scroll listener for parallax effect
-  useEffect(() => {
-    const handleScroll = () => {
-      const scroll = window.scrollY;
-      setTopParticleOffsets(prev => prev.map(val => val + scroll * 0.02));
-      setBottomParticleOffsets(prev => prev.map(val => val + scroll * 0.015));
+    const fadeUp = {
+        hidden: { opacity: 0, y: 40 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
-  const topSections = [
-    { title: "Latest Gadgets", desc: "Explore the newest electronics released this year.", img: "https://i.ibb.co/8c1TQpF/gadget.png", gradient: "bg-gradient-to-br from-indigo-400 via-indigo-200 to-indigo-100" },
-    { title: "Top Brands", desc: "From Apple to Samsung, choose the best for your needs.", img: "https://i.ibb.co/9r1LJZP/brand.png", gradient: "bg-gradient-to-br from-purple-400 via-purple-200 to-purple-100" },
-    { title: "Best Deals", desc: "Grab limited-time offers and discounts on popular items.", img: "https://i.ibb.co/FzG7nZL/deals.png", gradient: "bg-gradient-to-br from-pink-400 via-pink-200 to-pink-100" },
-    { title: "Customer Support", desc: "Reliable service and warranty assistance at your fingertips.", img: "https://i.ibb.co/W2vHkVx/support.png", gradient: "bg-gradient-to-br from-green-400 via-green-200 to-green-100" },
-  ];
+    const blogs = Array.from({ length: 3 }).map((_, i) => ({
+        id: i,
+        title: `Blog Title ${i + 1}`,
+        desc: "Some informative content about our product and offers.",
+        image: `https://picsum.photos/seed/blog${i}/500/300`,
+    }));
 
-  const bottomSections = [
-    { title: "Quality Assurance", desc: "All electronics are verified and tested before shipping.", img: "https://i.ibb.co/2g9J1hN/quality.png", gradient: "bg-gradient-to-br from-indigo-400 via-indigo-200 to-indigo-100" },
-    { title: "Free Shipping", desc: "Enjoy free shipping on orders over $100.", img: "https://i.ibb.co/T2wCwL7/shipping.png", gradient: "bg-gradient-to-br from-purple-400 via-purple-200 to-purple-100" },
-    { title: "Easy Returns", desc: "Hassle-free returns within 30 days of purchase.", img: "https://i.ibb.co/hX6fR1h/returns.png", gradient: "bg-gradient-to-br from-pink-400 via-pink-200 to-pink-100" },
-    { title: "Exclusive Offers", desc: "Sign up to receive members-only deals and promotions.", img: "https://i.ibb.co/1nW6GpH/offers.png", gradient: "bg-gradient-to-br from-green-400 via-green-200 to-green-100" },
-  ];
+    // Section wise filter
+    const dealsData = data.filter((item) => item.categoryMore === "Deals");
+    const homeData = data.filter((item) => item.categoryMore === "Home");
+    const consumerData = data.filter((item) => item.categoryMore === "Consumer");
+    const offeredData = data.filter((item) => item.categoryMore === "Offered");
 
-  return (
-    <div className="pt-24 px-4 md:px-8 lg:px-16">
+    // 4 categories
+    const popular = data.filter((item) => item.category === "popular");
+    const newArrival = data.filter((item) => item.category === "newArrival");
+    const special = data.filter((item) => item.category === "special");
+    const topSell = data.filter((item) => item.category === "topSell");
 
-      {/* Top Sections */}
-      <div className="relative mb-8">
-        {topParticleOffsets.map((offset, idx) => (
-          <div key={idx} className="absolute w-2 h-2 bg-white rounded-full opacity-30 animate-bounce-slow" style={{ top: `${offset % 100}%`, left: `${Math.random() * 100}%`, animationDuration: `${2 + Math.random() * 3}s` }} />
-        ))}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative z-10">
-          {topSections.map((section, idx) => (
-            <div key={idx} className={`${section.gradient} p-6 rounded-2xl shadow-xl flex flex-col items-center text-center relative transition-transform hover:-translate-y-2 hover:shadow-2xl`}>
-              <div className="absolute w-20 h-20 rounded-full bg-white opacity-20 blur-2xl -z-10 animate-pulse-slow"></div>
-              <img src={section.img} alt={section.title} className="w-16 h-16 mb-4 animate-bounce-slow relative z-10 transition-transform hover:scale-110" />
-              <h3 className="font-bold text-lg text-gray-800 hover:text-gray-900 transition-colors">{section.title}</h3>
-              <p className="text-sm text-gray-700 mt-2 transition-transform hover:translate-y-1">{section.desc}</p>
+    return (
+        <div>
+            <div className="pt-20 px-4 lg:px-10 bg-gray-50">
+
+                {/* ========== HERO SECTION ========== */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+                    
+                    {/* Left Category List */}
+                    <div className="hidden md:block lg:col-span-2 bg-white rounded-lg shadow p-3">
+                        <ul className="space-y-1">
+                            {[
+                                "Automobiles",
+                                "Clothes and wear",
+                                "Home interiors",
+                                "Computer and tech",
+                                "Tools, equipments",
+                                "Sports and outdoor",
+                                "Animal and pets",
+                                "Machinery tools",
+                                "More category",
+                            ].map((cat, i) => (
+                                <li
+                                    key={i}
+                                    className="cursor-pointer text-base font-medium text-gray-700 px-2 py-2 rounded-md 
+                                    hover:bg-blue-50 hover:text-blue-600 hover:pl-4 transition-all duration-200"
+                                >
+                                    {cat}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* Banner */}
+                    <div className="lg:col-span-7 relative rounded-lg shadow overflow-hidden h-56 sm:h-72 lg:h-auto">
+                        <div className="absolute inset-0">
+                            <img
+                                src={banner}
+                                alt="Banner"
+                                className="w-full h-full object-cover"
+                            />
+                            <div className="absolute  bg-gradient-to-r from-black/60 to-black/20" />
+                        </div>
+
+                        <div className="relative z-10 flex items-center h-full">
+                            <div className="shadow-lg  p-6 sm:p-10">
+                                <h2 className="text-base sm:text-lg font-semibold text-white text-start pl-8">Latest trending</h2>
+                                <h1 className="text-xl sm:text-3xl font-bold text-white mt-2 pl-8">Electronic items</h1>
+                                <button className="mt-4 px-5 py-2 bg-white text-gray-800 font-medium rounded-lg shadow-md 
+                                    hover:bg-gray-100 hover:shadow-lg transition-all duration-200 text-start">
+                                    Find More Products
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* User Info + Offers */}
+                    <div className="lg:col-span-3 flex flex-col gap-3">
+                        <div className="hidden md:block bg-white rounded-lg shadow p-4 text-center">
+                            <p className="text-base py-2">Hi, let’s get started</p>
+                            <button className="w-full mt-2 bg-blue-500 text-white py-1 rounded">
+                                Join now
+                            </button>
+                            <button className="w-full mt-2 border border-gray-300 py-1 rounded">
+                                Log in
+                            </button>
+                        </div>
+                        <div className="bg-orange-400 text-white rounded-lg shadow p-4 text-center">
+                            <p>Get US $10 <br />off with a new <br /> supplier</p>
+                        </div>
+                        <div className="bg-blue-300 text-white rounded-lg shadow p-4 text-center">
+                            <p>Send quotes <br /> with supplier <br /> preferences</p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Deals & Offers */}
+                <DealsSection items={dealsData} />
+
+                {/* Other Sections */}
+                <Section title="Latest shop" items={homeData} bg="bg-green-100" />
+                <Section title="Consumer electronics and gadgets" items={consumerData} bg="bg-blue-100" />
+                <Section title="Offered Products" items={offeredData} bg="bg-pink-100" />
+                <Section title="Popular" items={popular} bg="bg-yellow-100" />
+                <Section title="New Arrivals" items={newArrival} bg="bg-purple-100" />
+                <Section title="Special Offers" items={special} bg="bg-red-100" />
+                <Section title="Top Selling" items={topSell} bg="bg-teal-100" />
             </div>
-          ))}
+
+            {/* Blog Section */}
+            <motion.section
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="py-16 px-4 sm:px-6 lg:px-10 bg-gray-50"
+            >
+                <h2 className="text-3xl font-bold text-center mb-10">Latest Articles</h2>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {blogs.map((blog) => (
+                        <motion.div
+                            key={blog.id}
+                            whileHover={{ scale: 1.05 }}
+                            className="bg-gradient-to-r from-white via-orange-50 to-orange-100 p-6 rounded-lg shadow-md overflow-hidden"
+                        >
+                            <img src={blog.image} alt={blog.title} className="w-full h-48 object-cover rounded-md" />
+                            <div className="p-4">
+                                <h3 className="font-semibold mb-2">{blog.title}</h3>
+                                <p className="text-gray-600 mb-3">{blog.desc}</p>
+                                <button className="text-pink-600 hover:underline">Read More</button>
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
+            </motion.section>
+
+            {/* Why Choose Us */}
+            <motion.section
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="py-16 px-4 sm:px-6 lg:px-10 bg-gradient-to-r from-white via-orange-50 to-orange-100 rounded-lg shadow-md"
+            >
+                <h2 className="text-3xl font-bold text-center mb-10">Why Choose Us?</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+                    {[
+                        { title: "Fast Delivery", desc: "Get your product quickly." },
+                        { title: "Premium Quality", desc: "Only the best products." },
+                        { title: "Secure Payment", desc: "We value your privacy." },
+                        { title: "24/7 Support", desc: "Always here to help." },
+                    ].map((item, i) => (
+                        <motion.div
+                            key={i}
+                            whileHover={{ scale: 1.05 }}
+                            className="p-6 bg-gray-50 rounded-2xl shadow-md"
+                        >
+                            <h3 className="font-semibold mb-2">{item.title}</h3>
+                            <p className="text-gray-600">{item.desc}</p>
+                        </motion.div>
+                    ))}
+                </div>
+            </motion.section>
+
+            {/* Newsletter */}
+            <motion.section
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="py-16 px-4 sm:px-6 lg:px-10 bg-gradient-to-r from-purple-500 to-indigo-600 text-white text-center"
+            >
+                <h2 className="text-3xl font-bold mb-4">Subscribe to Our Newsletter</h2>
+                <p className="mb-6">Get updates about our latest products and offers.</p>
+                <div className="flex flex-col sm:flex-row justify-center items-center gap-2">
+                    <input
+                        type="email"
+                        placeholder="Enter your email"
+                        className="px-4 py-2 rounded-lg sm:rounded-l-lg sm:rounded-r-none w-64 text-black"
+                    />
+                    <button className="px-6 py-2 bg-pink-600 rounded-lg sm:rounded-r-lg sm:rounded-l-none hover:scale-105 transition-transform">
+                        Subscribe
+                    </button>
+                </div>
+            </motion.section>
         </div>
-      </div>
+    );
+};
 
-      {/* Section Title */}
-      <SectionTitle text="Top Electronics for You" />
+// Deals Section with Countdown Timer
+const DealsSection = ({ items }) => {
+    const [timeLeft, setTimeLeft] = useState({ days: 4, hours: 0, minutes: 0, seconds: 0 });
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        {/* Sidebar */}
-        <div className="card bg-base-100 shadow-sm p-4 md:sticky md:top-20 h-fit space-y-6">
-          <div>
-            <h2 className="text-lg font-semibold mb-3">Brand</h2>
-            <div className="flex flex-col gap-2">
-              {["Apple", "Samsung", "Xiaomi", "Sony"].map(brand => (
-                <label key={brand} className="flex items-center gap-2">
-                  <input type="checkbox" checked={brands.includes(brand)} onChange={() => handleBrandChange(brand)} />
-                  {brand}
-                </label>
-              ))}
+    useEffect(() => {
+        const target = new Date();
+        target.setDate(target.getDate() + 4);
+
+        const interval = setInterval(() => {
+            const now = new Date();
+            const diff = target - now;
+
+            if (diff <= 0) {
+                clearInterval(interval);
+                setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+                return;
+            }
+
+            setTimeLeft({
+                days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+                hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+                minutes: Math.floor((diff / 1000 / 60) % 60),
+                seconds: Math.floor((diff / 1000) % 60),
+            });
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, []);
+
+    return (
+        <div className="bg-white p-4 m-4 rounded-lg shadow">
+            <div className="flex flex-col sm:flex-row justify-between items-center mb-3 gap-2">
+                <h2 className="font-bold">Deals and offers</h2>
+                <div className="flex gap-2 text-sm font-mono">
+                    {["days","hours","minutes","seconds"].map((unit,i)=>(
+                        <span
+                            key={i}
+                            className="relative inline-flex items-center justify-center px-3 py-1.5 rounded-full 
+                            bg-gradient-to-br from-blue-500 via-purple-600 to-pink-500
+                            text-white font-mono tabular-nums font-semibold
+                            shadow-lg shadow-pink-500/20 border border-white/20 backdrop-blur-md
+                            transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-pink-500/40"
+                        >
+                            {String(Object.values(timeLeft)[i]).padStart(2,"0")}{unit[0]}
+                        </span>
+                    ))}
+                </div>
             </div>
-          </div>
-          <div>
-            <h2 className="text-lg font-semibold mb-3">Max Price: ${maxPrice}</h2>
-            <input type="range" min="100" max="2000" value={maxPrice} onChange={(e)=>setMaxPrice(Number(e.target.value))} className="range range-sm w-full" />
-          </div>
-          <div>
-            <h2 className="text-lg font-semibold mb-3">Sort By</h2>
-            <select className="select select-sm w-full" onChange={(e)=>setSortBy(e.target.value)}>
-              <option value="default">Default</option>
-              <option value="low-high">Price: Low to High</option>
-              <option value="high-low">Price: High to Low</option>
-              <option value="newest">Newest</option>
-            </select>
-          </div>
-        </div>
 
-        {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:col-span-3">
-          {filteredItems.slice(0, visibleCount).map(item => (
-            <Showphonedata key={item.id} phoneprops={item} />
-          ))}
-        </div>
-      </div>
-
-      {/* Show All Button */}
-      {visibleCount < filteredItems.length && (
-        <div className="text-center my-6">
-          <button onClick={handleShowAll} className="btn btn-outline btn-primary">Show All</button>
-        </div>
-      )}
-
-      {/* Bottom Sections */}
-      <div className="relative mt-12">
-        {bottomParticleOffsets.map((offset, idx) => (
-          <div key={idx} className="absolute w-2 h-2 bg-white rounded-full opacity-30 animate-pulse-slow" style={{ top: `${offset % 100}%`, left: `${Math.random() * 100}%`, animationDuration: `${2 + Math.random() * 2}s` }} />
-        ))}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative z-10">
-          {bottomSections.map((section, idx) => (
-            <div key={idx} className={`${section.gradient} p-6 rounded-2xl shadow-xl flex flex-col items-center text-center relative transition-transform hover:-translate-y-2 hover:shadow-2xl`}>
-              <div className="absolute w-20 h-20 rounded-full bg-white opacity-20 blur-2xl -z-10 animate-pulse-slow"></div>
-              <img src={section.img} alt={section.title} className="w-16 h-16 mb-4 animate-bounce-slow relative z-10 transition-transform hover:scale-110" />
-              <h3 className="font-bold text-lg text-gray-800 hover:text-gray-900 transition-colors">{section.title}</h3>
-              <p className="text-sm text-gray-700 mt-2 transition-transform hover:translate-y-1">{section.desc}</p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+                {items.map((item, i) => (
+                    <div key={i} className="border rounded-lg p-3 text-center hover:shadow">
+                        <div className="h-24 bg-gray-100 rounded mb-2 flex items-center justify-center">
+                            <img src={item.image} alt={item.name} className="h-20 object-contain" />
+                        </div>
+                        <h3 className="font-medium">{item.name}</h3>
+                        {item.discount && (
+                            <span className="text-red-500 font-semibold">-{item.discount}%</span>
+                        )}
+                    </div>
+                ))}
             </div>
-          ))}
         </div>
-      </div>
+    );
+};
 
-    </div>
-  );
+// Generic Section
+const Section = ({ title, items, bg }) => {
+    return (
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 p-4">
+            <div className={`col-span-3 ${bg} rounded-lg shadow flex items-center justify-center py-6`}>
+                <h2 className="font-bold text-lg">{title}</h2>
+            </div>
+            <div className="col-span-9 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                {items.map((item, i) => (
+                    <div key={i} className="border rounded-lg p-3 text-center hover:shadow bg-white">
+                        <div className="h-20 bg-gray-100 rounded mb-2 flex items-center justify-center">
+                            <img src={item.image} alt={item.name} className="h-16 object-contain" />
+                        </div>
+                        <h3 className="font-semibold">{item.name}</h3>
+                        {item.price && <p className="text-sm text-gray-500">From {item.price}</p>}
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
 };
 
 export default FashionPage;

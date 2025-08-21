@@ -48,7 +48,7 @@ const Banner = () => {
               style={{ backgroundImage: `url(${slide.image})` }}
             >
               {/* Overlay */}
-              <div className="absolute inset-0 bg-black/50"></div>
+              <div className="absolute  "></div>
 
               {/* Text Info */}
               <div className="relative text-center text-white px-4 sm:px-6 md:px-0 max-w-2xl">

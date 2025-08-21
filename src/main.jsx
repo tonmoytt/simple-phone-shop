@@ -13,6 +13,9 @@ import DetailsData from './Components/Component/Phones/Showphonedata/DetailsData
 import Dashboard from './Components/Component/Phones/Showphonedata/DetailsData/Dashboard/Dashboard.jsx';
 import Electronics from './Components/Component/Pages/Electronics/Electronics.jsx';
 import FashionPage from './Components/Component/Pages/Electronics/FashionPage/FashionPage.jsx';
+import Offerd from './Components/Component/Pages/Electronics/Offerd/Offerd.jsx';
+import AllOfferd from './Components/Component/Pages/Electronics/Offerd/AllOfferd/AllOfferd.jsx';
+import DealsPage from './Components/Component/Pages/Electronics/Deals/Deals.jsx';
 
 const router = createBrowserRouter([
   {
@@ -41,6 +44,18 @@ const router = createBrowserRouter([
       {
         path:'/fashion',
         element: <FashionPage></FashionPage>
+      },
+      // {
+      //   path:'/offers',
+      //   element: <Offerd></Offerd>
+      // },
+      {
+        path:'/offers',
+        element: <AllOfferd></AllOfferd>
+      },
+      {
+        path:'/deals',
+        element: <DealsPage></DealsPage>
       },
 
     ]

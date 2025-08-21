@@ -1,13 +1,12 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import { motion } from "framer-motion"; // ✅ FIXED
+import { motion } from "framer-motion";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import Post from './../Electronics/Post/Post'
+import Post from './../Electronics/Post/Post';
 
-// ---------- Dummy Data (Replace later) ----------
 const metrics = [
   { label: "Free Shipping", desc: "Free shipping on order", icon: "🚚" },
   { label: "Support 24/7", desc: "Contact us 24 hours a day", icon: "🕑" },
@@ -19,7 +18,7 @@ const topFeaturePosts = Array.from({ length: 10 }).map((_, i) => ({
   title: i % 2 ? "Smart Track" : "Unic Track",
   price: i % 2 ? 45.99 : 59.99,
   oldPrice: i % 2 ? 59.99 : 79.99,
-  image: `https://picsum.photos/seed/watch-${i}/600/460`, // ✅ FIXED
+  image: `https://picsum.photos/seed/watch-${i}/600/460`,
   features: ["Heart rate monitor", "Battery 10 days", "Alarm clock", "Smart watch"],
 }));
 
@@ -44,17 +43,17 @@ const SaleCard = () => (
     initial={{ opacity: 0, scale: 0.95 }}
     whileInView={{ opacity: 1, scale: 1 }}
     transition={{ duration: 0.6 }}
-    className="relative overflow-hidden rounded-2xl p-6 md:p-10 bg-gradient-to-r from-white via-orange-50 to-orange-100 p-6 rounded-lg shadow-md shadow-sm border"
+    className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-white via-orange-50 to-orange-100 shadow-md border p-6 md:p-10"
   >
-    <div className="absolute -left-20 -top-20 w-72 h-72 bg-orange-400/20 rounded-full blur-3xl" />
-    <div className="absolute -right-10 top-24 w-40 h-40 bg-amber-300/30 rounded-full blur-2xl" />
-    <div className="grid md:grid-cols-2 gap-8 items-center relative z-10">
+    <div className="absolute -left-20 -top-20 w-52 md:w-72 h-52 md:h-72 bg-orange-400/20 rounded-full blur-3xl" />
+    <div className="absolute -right-10 top-24 w-32 md:w-40 h-32 md:h-40 bg-amber-300/30 rounded-full blur-2xl" />
+    <div className="grid md:grid-cols-2 gap-6 items-center relative z-10">
       <div>
         <h3 className="text-2xl md:text-3xl font-bold mb-3">
           Sale up to <span className="text-orange-500">30% OFF</span>
         </h3>
         <p className="text-gray-600 mb-6">Compact Camera • Limited time offer</p>
-        <button className="px-5 py-3 rounded-xl bg-orange-500 text-white font-semibold shadow hover:bg-orange-600 transition">
+        <button className="px-5 py-3 rounded-xl bg-orange-500 text-white font-semibold shadow hover:bg-orange-600 transition w-full md:w-auto">
           Shop Now
         </button>
       </div>
@@ -62,90 +61,54 @@ const SaleCard = () => (
         whileHover={{ scale: 1.05 }}
         src="https://picsum.photos/seed/camera-sale/640/420"
         alt="camera"
-        className="w-full rounded-xl"
+        className="w-full rounded-xl mt-4 md:mt-0"
       />
     </div>
   </motion.div>
 );
 
-const testimonials = Array.from({ length: 5 }).map((_, i) => ({
-  id: i,
-  name: `Customer ${i + 1}`, // ✅ FIXED
-  review: "Amazing product, I really loved the quality and fast delivery!",
-  rating: 5,
-  avatar: `https://i.pravatar.cc/100?img=${i + 10}`, // ✅ FIXED
-}));
-
-const blogs = Array.from({ length: 3 }).map((_, i) => ({
-  id: i,
-  title: `Blog Title ${i + 1}`, // ✅ FIXED
-  desc: "Some informative content about our product and offers.",
-  image: `https://picsum.photos/seed/blog${i}/500/300`, // ✅ FIXED
-}));
-
-// ---------- Animation Variants ----------
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
 
-// ---------- Main Component ----------
 export default function GshopStyleLanding() {
   return (
-    <div className="min-h-screen bg-gradient-to-r from-indigo-300 via-purple-500 to-pink-500 text-gray-900">
-      <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
-        {/* 1) Banner Section */}
-        <motion.section
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="py-10 md:py-16"
-        >
-          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-white via-orange-50 to-orange-100  p-6 md:p-10 shadow-sm border">
-            <div className="absolute -right-24 -top-24 w-80 h-80 bg-orange-400/20 rounded-full blur-3xl" />
-            <div className="grid md:grid-cols-2 gap-10 items-center relative z-10">
+    <div className="pt-10 min-h-screen bg-gradient-to-r from-indigo-300 via-purple-500 to-pink-500 text-gray-900">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* Banner Section */}
+        <motion.section variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="py-10 md:py-16">
+          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-white via-orange-50 to-orange-100 shadow-sm border p-6 md:p-10">
+            <div className="absolute -right-24 -top-24 w-52 md:w-80 h-52 md:h-80 bg-orange-400/20 rounded-full blur-3xl" />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-center relative z-10">
               <motion.div initial={{ x: -50, opacity: 0 }} whileInView={{ x: 0, opacity: 1 }} transition={{ duration: 0.7 }}>
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="w-6 h-6 rounded-full bg-orange-500" />
-                   
-                </div>
-                <h1 className="text-3xl md:text-5xl font-extrabold leading-tight mb-6">
+
+                <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight mb-6">
                   Our Best <br /> Collections <span className="text-gray-800">For You</span>
                 </h1>
                 <p className="text-gray-600 mb-8">
                   The stylish smartwatches available to consumers are endless and perfect for workouts.
                 </p>
-                <div className="flex flex-wrap gap-3">
-                  <button className="px-5 py-3 rounded-xl bg-orange-500 text-white font-semibold shadow hover:bg-orange-600 transition">
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <button className="px-5 py-3 rounded-xl bg-orange-500 text-white font-semibold shadow hover:bg-orange-600 transition w-full sm:w-auto">
                     Add to cart
                   </button>
-                  <button className="px-5 py-3 rounded-xl bg-gradient-to-r from-white via-orange-50 to-orange-100 p-6 rounded-lg shadow-md border font-semibold hover:bg-gray-50 transition">
+                  <button className="px-5 py-3 rounded-xl bg-gradient-to-r from-white via-orange-50 to-orange-100 shadow font-semibold hover:bg-gray-50 transition w-full sm:w-auto">
                     More Info
                   </button>
                 </div>
               </motion.div>
-              <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.7 }}
-                className="relative"
-              >
-                <img
-                  src="https://picsum.photos/seed/hero-watch/700/520"
-                  alt="hero watch"
-                  className="w-full rounded-xl"
-                />
+              <motion.div initial={{ scale: 0.9, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} transition={{ duration: 0.7 }} className="relative">
+                <img src="https://picsum.photos/seed/hero-watch/700/520" alt="hero watch" className="w-full h-auto rounded-xl" />
               </motion.div>
             </div>
           </div>
-          <div className="grid md:grid-cols-3 gap-4 mt-6">
+
+          {/* Metrics */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-6">
             {metrics.map((m) => (
-              <motion.div
-                key={m.label}
-                whileHover={{ scale: 1.05 }}
-                className="bg-gradient-to-r from-white via-orange-50 to-orange-100 p-6 rounded-lg shadow-md rounded-2xl p-5 shadow-sm border flex items-start gap-4"
-              >
+              <motion.div key={m.label} whileHover={{ scale: 1.05 }} className="bg-gradient-to-r from-white via-orange-50 to-orange-100 p-5 rounded-2xl shadow-sm border flex items-start gap-4">
                 <div className="text-2xl">{m.icon}</div>
                 <div>
                   <p className="font-semibold">{m.label}</p>
@@ -156,51 +119,87 @@ export default function GshopStyleLanding() {
           </div>
         </motion.section>
 
-        {/* Other sections remain same but wrapped with <motion.section> and animations (Top Features, Popular Products, Best Product, Testimonials, Blogs, Why Choose Us, Newsletter) */}
-
-
-
-
-        {/* 2) Top features of the watch (Swiper with center image, info on both sides) */}
+        {/* Top Features */}
         <section className="py-12">
-          <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">Top features of the watch</h2>
+          <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">
+            Top features of the watch
+          </h2>
+
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}
-            spaceBetween={30}
+            spaceBetween={20}
             slidesPerView={1}
             navigation
             pagination={{ clickable: true }}
             autoplay={{ delay: 2800 }}
+            breakpoints={{
+              640: { slidesPerView: 1 },
+              768: { slidesPerView: 1 },
+              1024: { slidesPerView: 1 },
+            }}
             className="pb-10"
           >
             {topFeaturePosts.map((item) => (
               <SwiperSlide key={item.id}>
-                <div className="bg-gradient-to-r from-white via-orange-50 to-orange-100 p-6 rounded-lg shadow-md rounded-2xl p-8 shadow-sm border grid md:grid-cols-3 gap-6 items-center">
-                  <div className="text-right">
+                <div
+                  className="
+            bg-gradient-to-r from-white via-orange-50 to-orange-100 
+            p-6 rounded-2xl shadow-sm border 
+            grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 
+            gap-6 items-center
+          "
+                >
+                  {/* Left */}
+                  <div className="text-center md:text-left md:ml-20">
                     <h3 className="text-xl font-bold mb-2">{item.title}</h3>
                     <ul className="text-gray-700 space-y-2 mb-4 list-disc list-inside">
                       {item.features.map((f, idx) => (
                         <li key={idx}>{f}</li>
                       ))}
                     </ul>
-                    <p className="text-gray-600 mb-3">Premium smartwatch with productivity features.</p>
-                    <div className="flex justify-end gap-3 mb-5">
-                      <span className="text-2xl font-extrabold">${item.price.toFixed(2)}</span>
-                      <span className="text-gray-400 line-through">${item.oldPrice.toFixed(2)}</span>
+                    <p className="text-gray-600 mb-3">
+                      Premium smartwatch with productivity features.
+                    </p>
+                    <div className="flex justify-center md:justify-start gap-3 mb-5">
+                      <span className="text-2xl font-extrabold">
+                        ${item.price.toFixed(2)}
+                      </span>
+                      <span className="text-gray-400 line-through">
+                        ${item.oldPrice.toFixed(2)}
+                      </span>
                     </div>
                   </div>
+
+                  {/* Center Image */}
                   <div className="flex justify-center">
-                    <img src={item.image} alt={item.title} className="w-60 h-60 object-cover rounded-xl" />
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full max-w-[200px] sm:max-w-[220px] md:max-w-[250px] h-auto object-cover rounded-xl"
+                    />
                   </div>
-                  <div className="text-left">
+
+                  {/* Right */}
+                  <div className="text-center md:text-left">
                     <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                    <p className="text-gray-600 mb-3">Stylish design with fitness features.</p>
+                    <p className="text-gray-600 mb-3">
+                      Stylish design with fitness features.
+                    </p>
                     <ul className="text-gray-700 space-y-2 mb-4 list-disc list-inside">
                       {item.features.map((f, idx) => (
                         <li key={idx}>{f}</li>
                       ))}
                     </ul>
-                    <button className="px-5 py-3 rounded-xl bg-orange-500 text-white font-semibold shadow hover:bg-orange-600 transition">Buy Now</button>
+                    <button
+                      className="
+                px-5 py-3 rounded-xl bg-orange-500 
+                text-white font-semibold shadow 
+                hover:bg-orange-600 transition 
+                w-full md:w-auto
+              "
+                    >
+                      Buy Now
+                    </button>
                   </div>
                 </div>
               </SwiperSlide>
@@ -208,9 +207,10 @@ export default function GshopStyleLanding() {
           </Swiper>
         </section>
 
-        <Post></Post>
 
-        {/* 3) Popular products (Swiper with 7 cards) */}
+        <Post />
+
+        {/* Popular Products */}
         <section className="py-12">
           <h2 className="text-2xl md:text-3xl font-bold mb-6">Popular products</h2>
           <Swiper
@@ -229,8 +229,8 @@ export default function GshopStyleLanding() {
           >
             {popularProducts.map((p) => (
               <SwiperSlide key={p.id}>
-                <div className="bg-gradient-to-r from-white via-orange-50 to-orange-100 p-6 rounded-lg shadow-md rounded-2xl p-4 shadow-sm border hover:shadow-md transition grid gap-3">
-                  <img src={p.image} alt={p.name} className="w-full rounded-lg aspect-video object-cover" />
+                <div className="bg-gradient-to-r from-white via-orange-50 to-orange-100 p-4 rounded-2xl shadow-sm border hover:shadow-md transition grid gap-3">
+                  <img src={p.image} alt={p.name} className="w-full h-auto rounded-lg object-cover aspect-video" />
                   <div>
                     <p className="text-sm text-gray-500">Gadgets</p>
                     <h3 className="font-semibold">{p.name}</h3>
@@ -245,9 +245,9 @@ export default function GshopStyleLanding() {
           </Swiper>
         </section>
 
-        {/* 4) Best product (image left, info right, Swiper for images) */}
-        <section className="py-12">
-          <div className="bg-gradient-to-r from-white via-orange-50 to-orange-100 p-6 rounded-lg shadow-md rounded-2xl p-6 md:p-10 shadow-sm border grid md:grid-cols-2 gap-8 items-center">
+        {/* Best Product */}
+        <section className="hidden md:block py-12">
+          <div className="bg-gradient-to-r from-white via-orange-50 to-orange-100  rounded-2xl p-6 md:p-10 shadow-sm border grid md:grid-cols-2 gap-8 items-center">
             <div>
               <Swiper modules={[Navigation, Pagination, Autoplay]} spaceBetween={12} slidesPerView={1} navigation pagination={{ clickable: true }} autoplay={{ delay: 2600 }} className="rounded-xl overflow-hidden">
                 {bestProductGallery.map((src, idx) => (
@@ -265,154 +265,10 @@ export default function GshopStyleLanding() {
           </div>
         </section>
 
-        {/* 5) Sale 30% Offer */}
+        {/* Sale Card */}
         <section className="py-12">
           <SaleCard />
         </section>
-
-        {/* Extra Sections */}
-
-
-        {/* Testimonials */}
-        <motion.section
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="py-16 px-6 bg-gradient-to-r from-white via-orange-50 to-orange-100 p-6 rounded-lg shadow-md"
-        >
-          <h2 className="text-3xl font-bold text-center mb-10">Customer Reviews</h2>
-          <Swiper modules={[Pagination, Autoplay]} pagination={{ clickable: true }} autoplay={{ delay: 3000 }}>
-            {testimonials.map((t) => (
-              <SwiperSlide key={t.id}>
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-gray-50 p-6 rounded-2xl shadow-md text-center max-w-lg mx-auto"
-                >
-                  <img
-                    src={t.avatar}
-                    alt={t.name}
-                    className="w-16 h-16 rounded-full mx-auto mb-4"
-                  />
-                  <h3 className="font-semibold">{t.name}</h3>
-                  <p className="text-gray-600 mb-2">{t.review}</p>
-                  <p className="text-yellow-500">⭐⭐⭐⭐⭐</p>
-                </motion.div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </motion.section>
-
-        {/* Blog Section */}
-        <motion.section
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="py-16 px-6 bg-gray-50"
-        >
-          <h2 className="text-3xl font-bold text-center mb-10">Latest Articles</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {blogs.map((blog) => (
-              <motion.div
-                key={blog.id}
-                whileHover={{ scale: 1.05 }}
-                className="bg-gradient-to-r from-white via-orange-50 to-orange-100 p-6 rounded-lg shadow-md rounded-2xl shadow-md overflow-hidden"
-              >
-                <img src={blog.image} alt={blog.title} className="w-full h-48 object-cover" />
-                <div className="p-4">
-                  <h3 className="font-semibold mb-2">{blog.title}</h3>
-                  <p className="text-gray-600 mb-3">{blog.desc}</p>
-                  <button className="text-pink-600 hover:underline">Read More</button>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.section>
-
-        {/* Why Choose Us */}
-        <motion.section
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="py-16 px-6 bg-gradient-to-r from-white via-orange-50 to-orange-100 p-6 rounded-lg shadow-md"
-        >
-          <h2 className="text-3xl font-bold text-center mb-10">Why Choose Us?</h2>
-          <div className="grid md:grid-cols-4 gap-6 text-center">
-            {[
-              { title: "Fast Delivery", desc: "Get your product quickly." },
-              { title: "Premium Quality", desc: "Only the best products." },
-              { title: "Secure Payment", desc: "We value your privacy." },
-              { title: "24/7 Support", desc: "Always here to help." },
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                whileHover={{ scale: 1.05 }}
-                className="p-6 bg-gray-50 rounded-2xl shadow-md"
-              >
-                <h3 className="font-semibold mb-2">{item.title}</h3>
-                <p className="text-gray-600">{item.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.section>
-
-        {/* Newsletter */}
-        <motion.section
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="py-16 px-6 bg-gradient-to-r from-purple-500 to-indigo-600 text-white text-center"
-        >
-          <h2 className="text-3xl font-bold mb-4">Subscribe to Our Newsletter</h2>
-          <p className="mb-6">Get updates about our latest products and offers.</p>
-          <div className="flex justify-center">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="px-4 py-2 rounded-l-lg w-64 text-black"
-            />
-            <button className="px-6 py-2 bg-pink-600 rounded-r-lg hover:scale-105 transition-transform">
-              Subscribe
-            </button>
-          </div>
-        </motion.section>
-
-        <footer className="py-10 text-sm text-gray-600">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <h4 className="font-semibold mb-2">Gshop</h4>
-              <p>High quality gadgets and wearables.</p>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-2">Find product</h4>
-              <ul className="space-y-1">
-                <li>Smart watch</li>
-                <li>Headphone</li>
-                <li>Camera</li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-2">Get help</h4>
-              <ul className="space-y-1">
-                <li>Order Status</li>
-                <li>Shipping</li>
-                <li>Returns</li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-2">About</h4>
-              <ul className="space-y-1">
-                <li>Contact</li>
-                <li>Careers</li>
-                <li>Privacy</li>
-              </ul>
-            </div>
-          </div>
-          <p className="mt-8 text-center">© {new Date().getFullYear()} Gshop. All rights reserved.</p>
-        </footer>
 
       </div>
     </div>

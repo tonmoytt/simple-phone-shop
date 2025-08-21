@@ -11,7 +11,9 @@
     "brand": "Samsung",
     "device": "phone",
     "releaseDate": "2024-02-15",
-    "image": "https://i.ibb.co/C3ppN4tP/1p.jpg"
+    "image": "https://i.ibb.co/C3ppN4tP/1p.jpg",
+    "category": "newArrival",
+    "categoryMore": "Home"
   },
   {
     "id": 2,
@@ -25,7 +27,10 @@
     "brand": "Apple",
     "device": "laptop",
     "releaseDate": "2023-11-20",
-    "image": "https://i.ibb.co/FqwYZJTv/1l.jpg"
+    "image": "https://i.ibb.co/FqwYZJTv/1l.jpg",
+    "category": "popular",
+    "categoryMore": "Deals",
+    "discount": "30%"
   },
   {
     "id": 21,
@@ -37,7 +42,9 @@
     "brand": "Apple",
     "device": "watch",
     "releaseDate": "2023-09-22",
-    "image": "https://i.ibb.co.com/zWbk7cNX/download.jpg"
+    "image": "https://i.ibb.co.com/zWbk7cNX/download.jpg",
+    "category": "popular",
+    "categoryMore": "Consumer"
   },
   {
     "id": 3,
@@ -49,7 +56,9 @@
     "brand": "Apple",
     "device": "earbuds",
     "releaseDate": "2023-09-18",
-    "image": "https://i.ibb.co/S75dHVP0/1a.jpg"
+    "image": "https://i.ibb.co/S75dHVP0/1a.jpg",
+    "category": "popular",
+    "categoryMore": "Consumer"
   },
   {
     "id": 22,
@@ -61,7 +70,10 @@
     "brand": "Samsung",
     "device": "watch",
     "releaseDate": "2023-08-15",
-    "image": "https://i.ibb.co.com/35qqC2fR/Samsung-Galaxy-Watch-5-Pro.jpg"
+    "image": "https://i.ibb.co.com/35qqC2fR/Samsung-Galaxy-Watch-5-Pro.jpg",
+    "category": "topSell",
+    "categoryMore": "Deals",
+    "discount": "15%"
   },
   {
     "id": 4,
@@ -75,7 +87,9 @@
     "brand": "Apple",
     "device": "phone",
     "releaseDate": "2023-09-22",
-    "image": "https://i.ibb.co/zHnYv74N/2p.jpg"
+    "image": "https://i.ibb.co/zHnYv74N/2p.jpg",
+    "category": "topSell",
+    "categoryMore": "Home"
   },
   {
     "id": 5,
@@ -89,7 +103,10 @@
     "brand": "HP",
     "device": "laptop",
     "releaseDate": "2023-08-10",
-    "image": "https://i.ibb.co/fdGgzCC3/3l.jpg"
+    "image": "https://i.ibb.co/fdGgzCC3/3l.jpg",
+    "category": "topSell",
+    "categoryMore": "Deals",
+    "discount": "35%"
   },
   {
     "id": 23,
@@ -101,7 +118,9 @@
     "brand": "Garmin",
     "device": "watch",
     "releaseDate": "2023-06-10",
-    "image": "https://i.ibb.co.com/BHRqZnjL/Fossil-Gen-7.jpg"
+    "image": "https://i.ibb.co.com/BHRqZnjL/Fossil-Gen-7.jpg",
+    "category": "popular",
+    "categoryMore": "Consumer"
   },
   {
     "id": 6,
@@ -113,7 +132,9 @@
     "brand": "Sony",
     "device": "earbuds",
     "releaseDate": "2023-07-25",
-    "image": "https://i.ibb.co/fYMHB9SD/3a.jpg"
+    "image": "https://i.ibb.co/fYMHB9SD/3a.jpg",
+    "category": "topSell",
+    "categoryMore": "Home"
   },
   {
     "id": 7,
@@ -127,7 +148,9 @@
     "brand": "OnePlus",
     "device": "phone",
     "releaseDate": "2024-01-10",
-    "image": "https://i.ibb.co/ksF9TKvm/3p.jpg"
+    "image": "https://i.ibb.co/ksF9TKvm/3p.jpg",
+    "category": "newArrival",
+    "categoryMore": "Offered"
   },
   {
     "id": 24,
@@ -139,7 +162,9 @@
     "brand": "Fossil",
     "device": "watch",
     "releaseDate": "2023-04-20",
-    "image": "https://i.ibb.co.com/BHRqZnjL/Fossil-Gen-7.jpg"
+    "image": "https://i.ibb.co.com/BHRqZnjL/Fossil-Gen-7.jpg",
+    "category": "special",
+    "categoryMore": "Home"
   },
   {
     "id": 8,
@@ -151,7 +176,23 @@
     "brand": "Samsung",
     "device": "earbuds",
     "releaseDate": "2023-08-28",
-    "image": "https://i.ibb.co/prxpkL4f/2a.jpg"
+    "image": "https://i.ibb.co/prxpkL4f/2a.jpg",
+    "category": "special",
+   
+    "categoryMore": "Consumer"
+  },
+  {
+    "id": 17,
+    "name": "Samsung Galaxy Buds2 Pro",
+    "about": "Hi-Fi sound with ANC and 360 Audio, fits snugly for comfort.",
+    "price": 229,
+    "rating": 4.6,
+    "model": "SM-R510",
+    "brand": "Samsung",
+    "device": "earbuds",
+    "releaseDate": "2023-08-28",
+    "image": "https://i.ibb.co/prxpkL4f/2a.jpg",
+    "category": "newArrival"
   },
   {
     "id": 9,
@@ -165,7 +206,9 @@
     "brand": "Dell",
     "device": "laptop",
     "releaseDate": "2024-03-01",
-    "image": "https://i.ibb.co/99V8V2vD/2l.webp"
+    "image": "https://i.ibb.co/99V8V2vD/2l.webp",
+    "category": "newArrival",
+    "categoryMore": "Home"
   },
   {
     "id": 25,
@@ -177,7 +220,10 @@
     "brand": "Apple",
     "device": "watch",
     "releaseDate": "2023-09-22",
-    "image": "https://i.ibb.co.com/V07Wn153/Samsung-Galaxy-Watch-6.jpg"
+    "image": "https://i.ibb.co.com/V07Wn153/Samsung-Galaxy-Watch-6.jpg",
+    "category": "special",
+    "categoryMore": "Deals",
+    "discount": "25%"
   },
   {
     "id": 10,
@@ -191,7 +237,9 @@
     "brand": "Xiaomi",
     "device": "phone",
     "releaseDate": "2023-12-15",
-    "image": "https://i.ibb.co/NgRZ1Ywt/4p.jpg"
+    "image": "https://i.ibb.co/NgRZ1Ywt/4p.jpg",
+    "category": "special",
+    "categoryMore": "Offered"
   },
   {
     "id": 11,
@@ -205,7 +253,9 @@
     "brand": "Lenovo",
     "device": "laptop",
     "releaseDate": "2023-06-05",
-    "image": "https://i.ibb.co/fVR9RMT3/4l.jpg"
+    "image": "https://i.ibb.co/fVR9RMT3/4l.jpg",
+    "category": "special",
+    "categoryMore": "Home"
   },
   {
     "id": 26,
@@ -217,7 +267,11 @@
     "brand": "Samsung",
     "device": "watch",
     "releaseDate": "2023-07-10",
-    "image": "https://i.ibb.co.com/b5SHWgM9/download-1.jpg"
+    "image": "https://i.ibb.co.com/b5SHWgM9/download-1.jpg",
+    "category": "topSell",
+    "categoryMore": "Deals"
+    ,
+    "discount": "40%"
   },
   {
     "id": 12,
@@ -231,7 +285,9 @@
     "brand": "Google",
     "device": "phone",
     "releaseDate": "2023-10-12",
-    "image": "https://i.ibb.co/Ngxwpfcq/5p.jpg"
+    "image": "https://i.ibb.co/Ngxwpfcq/5p.jpg",
+    "category": "special",
+    "categoryMore": "Offered"
   },
   {
     "id": 13,
@@ -243,7 +299,9 @@
     "brand": "Realme",
     "device": "earbuds",
     "releaseDate": "2023-05-22",
-    "image": "https://i.ibb.co/4R14gnjC/4a.jpg"
+    "image": "https://i.ibb.co/4R14gnjC/4a.jpg",
+    "category": "special",
+    "categoryMore": "Home"
   },
   {
     "id": 14,
@@ -257,7 +315,9 @@
     "brand": "Realme",
     "device": "phone",
     "releaseDate": "2023-12-01",
-    "image": "https://i.ibb.co/k234yCZ5/6p.jpg"
+    "image": "https://i.ibb.co/k234yCZ5/6p.jpg",
+    "category": "special",
+    "categoryMore": "Offered"
   },
   {
     "id": 15,
@@ -271,6 +331,8 @@
     "brand": "ASUS",
     "device": "laptop",
     "releaseDate": "2023-07-12",
-    "image": "https://i.ibb.co/DDkz61pn/5l.jpg"
+    "image": "https://i.ibb.co/DDkz61pn/5l.jpg",
+    "category": "topSell",
+    "categoryMore": "Home"
   }
 ]

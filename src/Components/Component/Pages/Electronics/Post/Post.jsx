@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
- 
- import Showphonedata from './../../../Phones/Showphonedata/Showphonedata'
- import SectionTitle from './../../../Phones/SectionTitle/SectionTitle'
+import SectionTitle from './../../../Phones/SectionTitle/SectionTitle'
 
 const FashionPage = () => {
   const [items, setItems] = useState([]);
@@ -12,22 +10,22 @@ const FashionPage = () => {
   const [maxPrice, setMaxPrice] = useState(2000);
   const [sortBy, setSortBy] = useState("default");
 
-  // Particle offsets for parallax
-  const [topParticleOffsets, setTopParticleOffsets] = useState([]);
-  const [bottomParticleOffsets, setBottomParticleOffsets] = useState([]);
+  const [topParticles, setTopParticles] = useState([]);
+  const [bottomParticles, setBottomParticles] = useState([]);
 
+  // Fetch items
   useEffect(() => {
     fetch("/Phone.json")
-      .then((res) => res.json())
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => {
         setItems(data);
         setFilteredItems(data);
       });
   }, []);
 
+  // Filter & Sort
   useEffect(() => {
     let filtered = [...items];
-
     if (brands.length > 0) filtered = filtered.filter(d => brands.includes(d.brand));
     filtered = filtered.filter(d => d.price <= maxPrice);
 
@@ -44,21 +42,39 @@ const FashionPage = () => {
 
   const handleShowAll = () => setVisibleCount(filteredItems.length);
 
-  // Initialize particle offsets
+  // Initialize particles
   useEffect(() => {
-    setTopParticleOffsets([...Array(15)].map(() => Math.random() * 100));
-    setBottomParticleOffsets([...Array(15)].map(() => Math.random() * 100));
+    const colors = ["#F87171", "#60A5FA", "#34D399", "#FBBF24", "#A78BFA"];
+    const createParticles = () => [...Array(25)].map(() => ({
+      top: Math.random() * 100,
+      left: Math.random() * 100,
+      size: 2 + Math.random() * 4,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      speed: 0.5 + Math.random() * 1.5,
+      phase: Math.random() * 2 * Math.PI
+    }));
+    setTopParticles(createParticles());
+    setBottomParticles(createParticles());
   }, []);
 
-  // Scroll listener for parallax effect
+  // Particle animation
   useEffect(() => {
-    const handleScroll = () => {
-      const scroll = window.scrollY;
-      setTopParticleOffsets(prev => prev.map(val => val + scroll * 0.02));
-      setBottomParticleOffsets(prev => prev.map(val => val + scroll * 0.015));
+    let animationFrame;
+    const animateParticles = () => {
+      setTopParticles(prev => prev.map(p => ({
+        ...p,
+        top: (p.top + Math.sin(p.phase + Date.now() * 0.002) * 0.1) % 100,
+        left: (p.left + Math.cos(p.phase + Date.now() * 0.002) * 0.1) % 100
+      })));
+      setBottomParticles(prev => prev.map(p => ({
+        ...p,
+        top: (p.top + Math.sin(p.phase + Date.now() * 0.002) * 0.07) % 100,
+        left: (p.left + Math.cos(p.phase + Date.now() * 0.002) * 0.07) % 100
+      })));
+      animationFrame = requestAnimationFrame(animateParticles);
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    animateParticles();
+    return () => cancelAnimationFrame(animationFrame);
   }, []);
 
   const topSections = [
@@ -76,49 +92,44 @@ const FashionPage = () => {
   ];
 
   return (
-    <div className="pt-24 px-4 md:px-8 lg:px-16">
+    <div className="pt-24 px-4 sm:px-6 md:px-8 lg:px-16 relative">
+
+      {/* Top Particles */}
+      {topParticles.map((p, idx) => (
+        <div key={idx} style={{ top: `${p.top}%`, left: `${p.left}%`, width: p.size, height: p.size, backgroundColor: p.color }}
+          className="absolute rounded-full opacity-60" />
+      ))}
 
       {/* Top Sections */}
-      <div className="relative mb-8">
-        {topParticleOffsets.map((offset, idx) => (
-          <div key={idx} className="absolute w-2 h-2 bg-white rounded-full opacity-30 animate-bounce-slow" style={{ top: `${offset % 100}%`, left: `${Math.random() * 100}%`, animationDuration: `${2 + Math.random() * 3}s` }} />
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-8 relative z-10">
+        {topSections.map((section, idx) => (
+          <div key={idx} className={`${section.gradient} p-6 rounded-3xl shadow-2xl flex flex-col items-center text-center transform transition-all hover:-translate-y-3 hover:scale-105 hover:shadow-3xl`}>
+            <img src={section.img} alt={section.title} className="w-20 h-20 mb-4" />
+            <h3 className="font-bold text-xl text-gray-800">{section.title}</h3>
+            <p className="text-gray-700 mt-2">{section.desc}</p>
+          </div>
         ))}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative z-10">
-          {topSections.map((section, idx) => (
-            <div key={idx} className={`${section.gradient} p-6 rounded-2xl shadow-xl flex flex-col items-center text-center relative transition-transform hover:-translate-y-2 hover:shadow-2xl`}>
-              <div className="absolute w-20 h-20 rounded-full bg-white opacity-20 blur-2xl -z-10 animate-pulse-slow"></div>
-              <img src={section.img} alt={section.title} className="w-16 h-16 mb-4 animate-bounce-slow relative z-10 transition-transform hover:scale-110" />
-              <h3 className="font-bold text-lg text-gray-800 hover:text-gray-900 transition-colors">{section.title}</h3>
-              <p className="text-sm text-gray-700 mt-2 transition-transform hover:translate-y-1">{section.desc}</p>
-            </div>
-          ))}
-        </div>
       </div>
 
-      {/* Section Title */}
       <SectionTitle text="Top Electronics for You" />
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        {/* Sidebar */}
-        <div className="card bg-base-100 shadow-sm p-4 md:sticky md:top-20 h-fit space-y-6">
+      {/* Filter Bar */}
+      <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6 bg-white p-4 rounded-2xl shadow-lg">
+        <div className="flex flex-wrap items-center gap-4">
+          {["Apple", "Samsung", "Xiaomi", "Sony"].map(brand => (
+            <label key={brand} className="flex items-center gap-1 cursor-pointer bg-gray-100 px-3 py-1 rounded-lg hover:bg-gray-200">
+              <input type="checkbox" checked={brands.includes(brand)} onChange={() => handleBrandChange(brand)} />
+              {brand}
+            </label>
+          ))}
+        </div>
+        <div className="flex flex-wrap items-center gap-4">
           <div>
-            <h2 className="text-lg font-semibold mb-3">Brand</h2>
-            <div className="flex flex-col gap-2">
-              {["Apple", "Samsung", "Xiaomi", "Sony"].map(brand => (
-                <label key={brand} className="flex items-center gap-2">
-                  <input type="checkbox" checked={brands.includes(brand)} onChange={() => handleBrandChange(brand)} />
-                  {brand}
-                </label>
-              ))}
-            </div>
+            <span className="mr-2 font-semibold">Max Price: ${maxPrice}</span>
+            <input type="range" min="100" max="2000" value={maxPrice} onChange={(e)=>setMaxPrice(Number(e.target.value))} className="inline-block w-48" />
           </div>
           <div>
-            <h2 className="text-lg font-semibold mb-3">Max Price: ${maxPrice}</h2>
-            <input type="range" min="100" max="2000" value={maxPrice} onChange={(e)=>setMaxPrice(Number(e.target.value))} className="range range-sm w-full" />
-          </div>
-          <div>
-            <h2 className="text-lg font-semibold mb-3">Sort By</h2>
-            <select className="select select-sm w-full" onChange={(e)=>setSortBy(e.target.value)}>
+            <select className="border rounded-lg p-2" onChange={(e)=>setSortBy(e.target.value)}>
               <option value="default">Default</option>
               <option value="low-high">Price: Low to High</option>
               <option value="high-low">Price: High to Low</option>
@@ -126,39 +137,49 @@ const FashionPage = () => {
             </select>
           </div>
         </div>
-
-        {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:col-span-3">
-          {filteredItems.slice(0, visibleCount).map(item => (
-            <Showphonedata key={item.id} phoneprops={item} />
-          ))}
-        </div>
       </div>
 
-      {/* Show All Button */}
+      {/* Products Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {filteredItems.slice(0, visibleCount).map(item => (
+          <div key={item.id} className="relative bg-white rounded-3xl shadow-xl overflow-hidden group transform transition-all hover:-translate-y-2 hover:scale-105 hover:shadow-2xl">
+            {item.discount && <span className="absolute top-3 left-3 bg-red-500 text-white px-3 py-1 rounded-xl font-bold z-10">-{item.discount}</span>}
+            <img src={item.image} alt={item.name} className="w-full h-64 sm:h-72 md:h-64 lg:h-60 object-cover transition-transform group-hover:scale-105"/>
+            <div className="p-4">
+              <h3 className="font-bold text-lg">{item.name}</h3>
+              <p className="text-gray-400 line-through">{item.oldPrice} $</p>
+              <p className="text-yellow-500 font-bold text-xl">{item.newPrice} $</p>
+            </div>
+            <div className="absolute inset-0 bg-black bg-opacity-20 backdrop-blur-sm flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity space-y-4">
+              <button className="bg-orange-500 px-4 py-2 rounded-lg text-white font-semibold hover:bg-orange-600">Buy Now</button>
+              <button className="bg-white px-3 py-1 rounded-lg text-gray-800 hover:bg-gray-200">Quick View</button>
+            </div>
+          </div>
+        ))}
+      </div>
+
       {visibleCount < filteredItems.length && (
         <div className="text-center my-6">
           <button onClick={handleShowAll} className="btn btn-outline btn-primary">Show All</button>
         </div>
       )}
 
-      {/* Bottom Sections */}
-      <div className="relative mt-12">
-        {bottomParticleOffsets.map((offset, idx) => (
-          <div key={idx} className="absolute w-2 h-2 bg-white rounded-full opacity-30 animate-pulse-slow" style={{ top: `${offset % 100}%`, left: `${Math.random() * 100}%`, animationDuration: `${2 + Math.random() * 2}s` }} />
-        ))}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative z-10">
-          {bottomSections.map((section, idx) => (
-            <div key={idx} className={`${section.gradient} p-6 rounded-2xl shadow-xl flex flex-col items-center text-center relative transition-transform hover:-translate-y-2 hover:shadow-2xl`}>
-              <div className="absolute w-20 h-20 rounded-full bg-white opacity-20 blur-2xl -z-10 animate-pulse-slow"></div>
-              <img src={section.img} alt={section.title} className="w-16 h-16 mb-4 animate-bounce-slow relative z-10 transition-transform hover:scale-110" />
-              <h3 className="font-bold text-lg text-gray-800 hover:text-gray-900 transition-colors">{section.title}</h3>
-              <p className="text-sm text-gray-700 mt-2 transition-transform hover:translate-y-1">{section.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
+      {/* Bottom Particles */}
+      {bottomParticles.map((p, idx) => (
+        <div key={idx} style={{ top: `${p.top}%`, left: `${p.left}%`, width: p.size, height: p.size, backgroundColor: p.color }}
+          className="absolute rounded-full opacity-50" />
+      ))}
 
+      {/* Bottom Sections */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mt-12 relative z-10">
+        {bottomSections.map((section, idx) => (
+          <div key={idx} className={`${section.gradient} p-6 rounded-3xl shadow-2xl flex flex-col items-center text-center transform transition-all hover:-translate-y-3 hover:scale-105 hover:shadow-3xl`}>
+            <img src={section.img} alt={section.title} className="w-20 h-20 mb-4" />
+            <h3 className="font-bold text-xl text-gray-800">{section.title}</h3>
+            <p className="text-gray-700 mt-2">{section.desc}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
