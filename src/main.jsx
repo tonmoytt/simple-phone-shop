@@ -16,6 +16,8 @@ import FashionPage from './Components/Component/Pages/Electronics/FashionPage/Fa
 import Offerd from './Components/Component/Pages/Electronics/Offerd/Offerd.jsx';
 import AllOfferd from './Components/Component/Pages/Electronics/Offerd/AllOfferd/AllOfferd.jsx';
 import DealsPage from './Components/Component/Pages/Electronics/Deals/Deals.jsx';
+import Register from './Components/Authincation/AuthProvider/Register/Register.jsx';
+import Login from './Components/Authincation/AuthProvider/Login/Login.jsx';
 
 const router = createBrowserRouter([
   {
@@ -56,6 +58,14 @@ const router = createBrowserRouter([
       {
         path:'/deals',
         element: <DealsPage></DealsPage>
+      },
+      {
+        path:'/signup',
+        element: <Register></Register>
+      },
+      {
+        path:'/login',
+        element: <Login></Login>
       },
 
     ]

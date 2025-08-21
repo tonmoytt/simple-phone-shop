@@ -219,7 +219,7 @@ const Navbar = ({ cartCount = 0, Wishlist = 0 }) => {
       ></span>
 
       {/* Button Text */}
-      <span className="relative z-10">Register</span>
+    <Link to='/signup'></Link>  <span className="relative z-10">Register</span>
     </div>
   </div>
 </Link>

@@ -3,6 +3,7 @@ import Navbar from '../Navbar/Navbar';
 import Footer from '../Footer/Footer';
 import { Outlet } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
+import ScrollToTop from '../ScrollToTop/ScrollToTop';
 
 const Root = () => {
   // ---------------------- Cart State ----------------------
@@ -55,6 +56,7 @@ const Root = () => {
 
   return (
     <div className='bg-gradient-to-r from-indigo-300 via-purple-500 to-pink-500'>
+      <ScrollToTop></ScrollToTop>
       <Toaster position="top-center" reverseOrder={false} />
       <Navbar cartCount={cartCount} Wishlist={Wishlist} />
 
