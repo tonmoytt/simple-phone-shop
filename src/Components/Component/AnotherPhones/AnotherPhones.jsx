@@ -49,7 +49,7 @@ const AnotherPhones = () => {
                 <img
                   src={phone.image}
                   alt={phone.name}
-                  className="w-36 h-36 object-contain mb-4"
+                  className="w-52 md:w-36 h-36 object-contain mb-4"
                 />
                 <h3 className="font-bold text-lg text-gray-800">{phone.name}</h3>
                 <p className="text-purple-500 font-bold text-xl mt-2">

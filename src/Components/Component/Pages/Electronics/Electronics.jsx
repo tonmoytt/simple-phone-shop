@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { motion } from "framer-motion";
@@ -13,15 +13,6 @@ const metrics = [
   { label: "Support 24/7", desc: "Contact us 24 hours a day", icon: "🕑" },
   { label: "Payment Secure", desc: "Safe & secure payment", icon: "🔒" },
 ];
-
-const topFeaturePosts = Array.from({ length: 10 }).map((_, i) => ({
-  id: i + 1,
-  title: i % 2 ? "Smart Track" : "Unic Track",
-  price: i % 2 ? 45.99 : 59.99,
-  oldPrice: i % 2 ? 59.99 : 79.99,
-  image: `https://picsum.photos/seed/watch-${i}/600/460`,
-  features: ["Heart rate monitor", "Battery 10 days", "Alarm clock", "Smart watch"],
-}));
 
 const popularProducts = [
   { id: 1, name: "Wireless Headphone", price: 39.99, rating: 4.5, image: "https://picsum.photos/seed/headphone/400/300" },
@@ -54,10 +45,10 @@ const SaleCard = () => (
           Shop up to <span className="text-orange-500">30% OFF</span>
         </h3>
         <p className="text-gray-600 mb-6">Compact Camera • Limited time offer</p>
-        <Link to='/offers'>  <button className="px-5 py-3 rounded-xl bg-orange-500 text-white font-semibold shadow hover:bg-orange-600 transition w-full md:w-auto">
-
-          Shop Now
-        </button>
+        <Link to='/offers'>
+          <button className="px-5 py-3 rounded-xl bg-orange-500 text-white font-semibold shadow hover:bg-orange-600 transition w-full md:w-auto">
+            Shop Now
+          </button>
         </Link>
       </div>
       <motion.img
@@ -76,17 +67,28 @@ const fadeUp = {
 };
 
 export default function GshopStyleLanding() {
+  const [card, setCard] = useState([]);
+
+  useEffect(() => {
+    fetch("/Phone.json")
+      .then((res) => res.json())
+      .then((data) => {
+        const specialCards = data.filter((item) => item.category === "special");
+        setCard(specialCards);
+      })
+      .catch((err) => console.error("Error loading data:", err));
+  }, []);
+
   return (
     <div className="pt-10 min-h-screen bg-gradient-to-r from-white via-orange-50 to-orange-100">
       <div className="max-w-8xl mx-auto px-2">
 
         {/* Banner Section */}
         <motion.section variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="py-10 md:py-16">
-          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-white via-orange-50 to-orange-100 shadow-sm  p-6 md:p-10">
+          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-white via-orange-50 to-orange-100 shadow-sm p-6 md:p-10">
             <div className="absolute -right-24 -top-24 w-52 md:w-80 h-52 md:h-80 bg-orange-400/20 rounded-full blur-3xl" />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-center relative z-10">
               <motion.div initial={{ x: -50, opacity: 0 }} whileInView={{ x: 0, opacity: 1 }} transition={{ duration: 0.7 }}>
-
                 <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight mb-6">
                   Our Best <br /> Collections <span className="text-gray-800">For You</span>
                 </h1>
@@ -122,95 +124,72 @@ export default function GshopStyleLanding() {
           </div>
         </motion.section>
 
-        {/* Top Features */}
+        {/* ✅ Top Features (Dynamic from Phone.json) */}
         <section className="py-12">
           <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">
             Top features of the watch
           </h2>
 
-          <Swiper
-            modules={[Navigation, Pagination, Autoplay]}
-            spaceBetween={20}
-            slidesPerView={1}
-            navigation
-            pagination={{ clickable: true }}
-            autoplay={{ delay: 2800 }}
-            breakpoints={{
-              640: { slidesPerView: 1 },
-              768: { slidesPerView: 1 },
-              1024: { slidesPerView: 1 },
-            }}
-            className="pb-10"
-          >
-            {topFeaturePosts.map((item) => (
-              <SwiperSlide key={item.id}>
-                <div
-                  className="
-            bg-gradient-to-r from-white via-orange-50 to-orange-100 
-            p-6 rounded-2xl shadow-sm border 
-            grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 
-            gap-6 items-center
-          "
-                >
-                  {/* Left */}
-                  <div className="text-center md:text-left md:ml-20">
-                    <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                    <ul className="text-gray-700 space-y-2 mb-4 list-disc list-inside">
-                      {item.features.map((f, idx) => (
-                        <li key={idx}>{f}</li>
-                      ))}
-                    </ul>
-                    <p className="text-gray-600 mb-3">
-                      Premium smartwatch with productivity features.
-                    </p>
-                    <div className="flex justify-center md:justify-start gap-3 mb-5">
-                      <span className="text-2xl font-extrabold">
-                        ${item.price.toFixed(2)}
-                      </span>
-                      <span className="text-gray-400 line-through">
-                        ${item.oldPrice.toFixed(2)}
-                      </span>
+          {card.length > 0 ? (
+            <Swiper
+              modules={[Navigation, Pagination, Autoplay]}
+              spaceBetween={20}
+              slidesPerView={1}
+              navigation
+              pagination={{ clickable: true }}
+              autoplay={{ delay: 2800 }}
+              className="pb-10"
+            >
+              {card.map((item) => (
+                <SwiperSlide key={item.id}>
+                  <div className="bg-gradient-to-r from-white via-orange-50 to-orange-100 p-6 rounded-2xl shadow-sm border grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-center">
+                    {/* Left */}
+                    <div className="text-center md:text-left md:ml-20">
+                      <h3 className="text-xl font-bold mb-2">{item.name}</h3>
+                      <ul className="text-gray-700 space-y-2 mb-4 list-disc list-inside">
+                        <li>RAM: {item.ram}</li>
+                        <li>ROM: {item.rom}</li>
+                        <li>Model: {item.model}</li>
+                      </ul>
+                      <p className="text-gray-600 mb-3">{item.about}</p>
+                      <div className="flex justify-center md:justify-start gap-3 mb-5">
+                        <span className="text-2xl font-extrabold">
+                          ${item.price.toFixed(2)}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Center Image */}
+                    <div className="flex justify-center">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-full max-w-[200px] sm:max-w-[220px] md:max-w-[250px] h-auto object-cover rounded-xl"
+                      />
+                    </div>
+
+                    {/* Right */}
+                    <div className="text-center md:text-left">
+                      <h3 className="text-xl font-bold mb-2">{item.brand}</h3>
+                      <p className="text-gray-600 mb-3">
+                        Stylish design with premium features.
+                      </p>
+                      <Link to={`/details/${item.id}`}>
+                        <button
+                          className="px-5 py-3 rounded-xl bg-orange-500 text-white font-semibold shadow hover:bg-orange-600 transition w-full md:w-auto"
+                        >
+                          Buy Now
+                        </button>
+                      </Link>
                     </div>
                   </div>
-
-                  {/* Center Image */}
-                  <div className="flex justify-center">
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="w-full max-w-[200px] sm:max-w-[220px] md:max-w-[250px] h-auto object-cover rounded-xl"
-                    />
-                  </div>
-
-                  {/* Right */}
-                  <div className="text-center md:text-left">
-                    <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                    <p className="text-gray-600 mb-3">
-                      Stylish design with fitness features.
-                    </p>
-                    <ul className="text-gray-700 space-y-2 mb-4 list-disc list-inside">
-                      {item.features.map((f, idx) => (
-                        <li key={idx}>{f}</li>
-                      ))}
-                    </ul>
-                    <Link to={`/details/${item.id}`}>   <button
-                      className="
-                px-5 py-3 rounded-xl bg-orange-500 
-                text-white font-semibold shadow 
-                hover:bg-orange-600 transition 
-                w-full md:w-auto
-              "
-                    >
-                      Buy Now
-                    </button>
-                    </Link>
-                  </div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          ) : (
+            <p className="text-center text-gray-500">Loading top feature products...</p>
+          )}
         </section>
-
 
         <Post />
 
@@ -236,10 +215,7 @@ export default function GshopStyleLanding() {
                 <div className="bg-gradient-to-r from-white via-orange-50 to-orange-100 p-4 rounded-2xl shadow-sm border hover:shadow-md transition grid gap-3">
                   <Link to={`/details/${p.id}`}>
                     <div className="relative ml-auto cursor-pointer">
-                      <div
-                        className="tooltip tooltip-bottom tooltip-success"
-                        data-tip="Click & Get Details"
-                      >
+                      <div className="tooltip tooltip-bottom tooltip-success" data-tip="Click & Get Details">
                         <img
                           src={p.image}
                           alt={p.name}
@@ -255,25 +231,23 @@ export default function GshopStyleLanding() {
                         </div>
                       </div>
                     </div>
-
                   </Link>
                 </div>
               </SwiperSlide>
-
             ))}
           </Swiper>
-
         </section>
 
         {/* Best Product */}
         <section className="hidden md:block py-12">
-          <div className="bg-gradient-to-r from-white via-orange-50 to-orange-100  rounded-2xl p-6 md:p-10 shadow-sm border grid md:grid-cols-2 gap-8 items-center">
+          <div className="bg-gradient-to-r from-white via-orange-50 to-orange-100 rounded-2xl p-6 md:p-10 shadow-sm border grid md:grid-cols-2 gap-8 items-center">
             <div>
               <Swiper modules={[Navigation, Pagination, Autoplay]} spaceBetween={12} slidesPerView={1} navigation pagination={{ clickable: true }} autoplay={{ delay: 2600 }} className="rounded-xl overflow-hidden">
                 {bestProductGallery.map((src, idx) => (
                   <SwiperSlide key={idx}>
-                  <Link to={`/details/${idx}`}> <img src={src} alt={`best product ${idx + 1}`} className="w-full h-[300px] md:h-[400px]  rounded-xl" />
-                  </Link> 
+                    <Link to={`/details/${idx}`}>
+                      <img src={src} alt={`best product ${idx + 1}`} className="w-full h-[300px] md:h-[400px] rounded-xl" />
+                    </Link>
                   </SwiperSlide>
                 ))}
               </Swiper>
@@ -281,7 +255,8 @@ export default function GshopStyleLanding() {
             <div>
               <h2 className="text-2xl md:text-3xl font-bold mb-4">The best product for your best time</h2>
               <p className="text-gray-600 mb-6">Premium sport watch featuring GPS, heart-rate monitor, and vivid AMOLED display. Replace the left gallery with your live product images.</p>
-              <Link to='/fashion'> <button className="px-5 py-3 rounded-xl bg-orange-500 text-white font-semibold shadow hover:bg-orange-600 transition">Explore Now</button>
+              <Link to='/fashion'>
+                <button className="px-5 py-3 rounded-xl bg-orange-500 text-white font-semibold shadow hover:bg-orange-600 transition">Explore Now</button>
               </Link>
             </div>
           </div>
@@ -293,6 +268,6 @@ export default function GshopStyleLanding() {
         </section>
 
       </div>
-    </div >
+    </div>
   );
 }

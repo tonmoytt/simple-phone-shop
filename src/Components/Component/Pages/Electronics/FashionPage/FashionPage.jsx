@@ -2,7 +2,7 @@ import { div } from "framer-motion/client";
 import React, { useEffect, useState } from "react";
 import banner from '../../../../../assets/Logo/laptop-headphones-red-background_253401-4823.avif'
 import { motion } from "framer-motion";
-import { useOutletContext } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 
 const FashionPage = () => {
     const [data, setData] = useState([]);
@@ -261,14 +261,15 @@ const DealsSection = ({ items }) => {
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
                 {items.map((item, i) => (
-                    <div key={i} className="border rounded-lg p-3 text-center hover:shadow">
-                        <div className="h-24 bg-gray-100 rounded mb-2 flex items-center justify-center">
+                   <div key={i} className="border rounded-lg p-3 text-center hover:shadow">
+                       <Link to={`/details/${item.id}`}> <div className="h-24 bg-gray-100 rounded mb-2 flex items-center justify-center">
                             <img src={item.image} alt={item.name} className="h-20 object-contain" />
                         </div>
                         <h3 className="font-medium">{item.name}</h3>
                         {item.discount && (
                             <span className="text-red-500 font-semibold">-{item.discount}%</span>
                         )}
+                         </Link> 
                     </div>
                 ))}
             </div>
