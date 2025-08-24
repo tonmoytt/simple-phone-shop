@@ -55,7 +55,7 @@ const USB = (props) => (
 
 export default function Offerd() {
   return (
-    <div className="w-full mt-12  bg-[#CFEFF8] py-8">
+    <div className="w-full mt-12  bg-[#CFEFF8] py-4 px-4">
       {/* stage shadow */}
       <div className="relative mx-auto max-w-[1180px] rounded-xl shadow-2xl overflow-hidden">
         {/* deep navy backdrop + blobby gradient like reference */}

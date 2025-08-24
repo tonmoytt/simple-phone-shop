@@ -95,7 +95,7 @@ const Navbar = ({ cartCount = 0, Wishlist = 0 }) => {
             className={({ isActive }) =>
               `relative px-2 py-1 transition-all duration-300 text-[17px] ${isActive
                 ? "text-indigo-600 font-bold after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-full after:h-[3px] after:bg-indigo-600"
-                : "hover:text-indigo-500"
+                : "hover:text-black"
               }`
             }
           >
@@ -104,28 +104,28 @@ const Navbar = ({ cartCount = 0, Wishlist = 0 }) => {
 
           <NavLink
             to="/electronics"
-            className="flex items-center gap-1 text-[17px] hover:text-purple-600 transition-all"
+            className="flex items-center gap-1 text-[17px] hover:text-black transition-all"
           >
             <FaMobileAlt className="md:w-3 lg:w-4 md:h-3 lg:h-4"/> Electronics
           </NavLink>
 
           <NavLink
             to="/fashion"
-            className="flex items-center gap-1 text-[16px] hover:text-purple-600 transition-all"
+            className="flex items-center gap-1 text-[16px] hover:text-black transition-all"
           >
             <FaTshirt  className="md:w-3 lg:w-4 md:h-3 lg:h-4"/> Fashion
           </NavLink>
 
           <NavLink
             to="/offers"
-            className="flex items-center gap-1 text-[16px] hover:text-purple-600 transition-all"
+            className="flex items-center gap-1 text-[16px] hover:text-black transition-all"
           >
             <FaTags  className="md:w-3 lg:w-4 md:h-3 lg:h-4"/> Offers
           </NavLink>
 
           <NavLink
             to="/deals"
-            className="flex items-center gap-1 text-[16px] hover:text-purple-600 transition-all"
+            className="flex items-center gap-1 text-[16px] hover:text-black transition-all"
           >
             <FaStar  className="md:w-3 lg:w-4 md:h-3 lg:h-4"/> Deals
           </NavLink>
@@ -134,7 +134,7 @@ const Navbar = ({ cartCount = 0, Wishlist = 0 }) => {
           <div className="relative">
             <button
               onClick={() => setOpenDropdown(!openDropdown)}
-              className="flex items-center gap-1 text-[16px] hover:text-purple-600 transition-all"
+              className="flex items-center gap-1 text-[16px] hover:text-black transition-all"
             >
               Categories <FaChevronDown className="ml-1 text-sm" />
             </button>

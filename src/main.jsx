@@ -33,13 +33,13 @@ const router = createBrowserRouter([
       },
       {
         path: '/details/:id',
-        element:  <Privetroute><DetailsData></DetailsData></Privetroute>  ,
+        element:  <DetailsData></DetailsData>   ,
         loader: () => fetch('/Phone.json')
 
       },
       {
         path: '/dashboard',
-        element: <Privetroute><Dashboard></Dashboard></Privetroute> 
+        element:  <Dashboard></Dashboard> 
       },
       {
         path: '/electronics',

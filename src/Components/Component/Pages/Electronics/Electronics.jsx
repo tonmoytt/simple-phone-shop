@@ -77,12 +77,12 @@ const fadeUp = {
 
 export default function GshopStyleLanding() {
   return (
-    <div className="pt-10 min-h-screen bg-gradient-to-r from-indigo-300 via-purple-500 to-pink-500 text-gray-900">
+    <div className="pt-10 min-h-screen bg-gradient-to-r from-white via-orange-50 to-orange-100">
       <div className="max-w-8xl mx-auto px-2">
 
         {/* Banner Section */}
         <motion.section variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="py-10 md:py-16">
-          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-white via-orange-50 to-orange-100 shadow-sm border p-6 md:p-10">
+          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-white via-orange-50 to-orange-100 shadow-sm  p-6 md:p-10">
             <div className="absolute -right-24 -top-24 w-52 md:w-80 h-52 md:h-80 bg-orange-400/20 rounded-full blur-3xl" />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-center relative z-10">
               <motion.div initial={{ x: -50, opacity: 0 }} whileInView={{ x: 0, opacity: 1 }} transition={{ duration: 0.7 }}>

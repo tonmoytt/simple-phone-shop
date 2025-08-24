@@ -40,7 +40,7 @@ const brandList = [
 
 const Brands = () => {
   return (
-    <div className="mt-12 space-y-12">
+    <div className="mt-12 space-y-12 space-x-4">
       {/* Marquee Logos */}
       <div>
         <h2 className="text-2xl font-bold text-center mb-6">Our Top Brands</h2>
@@ -64,7 +64,7 @@ const Brands = () => {
       </div>
 
       {/* Promo Images */}
-      <div className="flex flex-col md:flex-row gap-4 items-center justify-center px-4 md:px-0">
+      <div className="flex flex-col md:flex-row gap-4 items-center justify-center px-4 md:px-6">
         <img
           src={promo1}
           alt="Brand promo 1"

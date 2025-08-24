@@ -19,7 +19,7 @@ const AllOfferd = () => {
   const newArrival = offerd.filter((item) => item.category === "newArrival");
 
   return (
-    <div className="bg-[#0c1333] py-10 px-4 sm:px-6 md:px-8 lg:px-16 space-y-20">
+    <div className="bg-gray-100 py-10 px-4 sm:px-6 md:px-8 lg:px-16 space-y-20">
 
       {/* Banner Section */}
       <motion.div
@@ -33,7 +33,7 @@ const AllOfferd = () => {
       {/* Deals Section */}
       <section>
         <motion.h2
-          className="text-2xl sm:text-3xl font-bold text-white mb-6"
+          className="text-2xl sm:text-3xl font-bold text-[#FF6900] mb-6"
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
@@ -79,7 +79,7 @@ const AllOfferd = () => {
       {/* Offered Section */}
       <section className="px-9 sm:px-6 lg:px-10 py-8">
         <motion.h2
-          className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-6 text-center sm:text-left"
+          className="text-xl sm:text-2xl md:text-3xl font-bold text-[#FF6900] mb-6 text-center"
           initial={{ opacity: 0, x: 50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
@@ -158,7 +158,7 @@ const AllOfferd = () => {
 
       {/* Quick Info Cards */}
       <section>
-        <motion.h2 className="text-2xl sm:text-3xl font-bold text-white mb-6" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}>
+        <motion.h2 className="text-2xl sm:text-3xl font-bold text-[#FF6900]  mb-6" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}>
           📌 Quick Info
         </motion.h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -183,7 +183,7 @@ const AllOfferd = () => {
 
       {/* New Arrival / Trending Section */}
       <section>
-        <motion.h2 className=" text-2xl sm:text-3xl font-bold text-white mb-6" initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
+        <motion.h2 className=" text-2xl sm:text-3xl font-bold text-[#FF6900] mb-6" initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
           🚀 Trending Now
         </motion.h2>
         <div className=" flex flex-row gap-6 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-300">

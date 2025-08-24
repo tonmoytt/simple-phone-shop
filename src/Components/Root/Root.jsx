@@ -111,7 +111,7 @@ const Root = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-indigo-300 via-purple-500 to-pink-500">
+    <div className="bg-gray-200">
       <ScrollToTop />
       <Navbar cartCount={cartCount} Wishlist={Wishlist} />
 
