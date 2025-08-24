@@ -6,6 +6,7 @@ import 'swiper/css/effect-fade';
 import image1 from './../../../assets/Images/audio-7276511_640.jpg';
 import image2 from './../../../assets/Images/bg14.png';
 import image3 from './../../../assets/Images/download.jpg';
+import { Link } from 'react-router-dom';
 
 const slidesData = [
   {
@@ -58,9 +59,10 @@ const Banner = () => {
                 <p className="text-sm sm:text-base md:text-lg pb-3 md:pb-4">
                   {slide.description}
                 </p>
-                <button className="bg-indigo-600 hover:bg-indigo-700 px-4 sm:px-5 md:px-6 py-2 rounded-full text-xs sm:text-sm md:text-lg transition">
+                <Link to='/fashion'>  <button className="bg-indigo-600 hover:bg-indigo-700 px-4 sm:px-5 md:px-6 py-2 rounded-full text-xs sm:text-sm md:text-lg transition">
                   {slide.buttonText}
                 </button>
+                </Link>
               </div>
             </div>
           </SwiperSlide>

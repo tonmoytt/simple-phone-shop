@@ -1,10 +1,12 @@
 import { div } from "framer-motion/client";
 import React, { useEffect, useState } from "react";
 import banner from '../../../../../assets/Logo/laptop-headphones-red-background_253401-4823.avif'
-import { motion } from "framer-motion"; 
+import { motion } from "framer-motion";
+import { useOutletContext } from "react-router-dom";
 
 const FashionPage = () => {
     const [data, setData] = useState([]);
+
 
     useEffect(() => {
         fetch("/Phone.json")
@@ -12,6 +14,8 @@ const FashionPage = () => {
             .then((resData) => setData(resData))
             .catch((err) => console.error("Error loading data:", err));
     }, []);
+
+    const { handleAddToCart } = useOutletContext();
 
     const fadeUp = {
         hidden: { opacity: 0, y: 40 },
@@ -43,7 +47,7 @@ const FashionPage = () => {
 
                 {/* ========== HERO SECTION ========== */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-                    
+
                     {/* Left Category List */}
                     <div className="hidden md:block lg:col-span-2 bg-white rounded-lg shadow p-3">
                         <ul className="space-y-1">
@@ -116,13 +120,14 @@ const FashionPage = () => {
                 <DealsSection items={dealsData} />
 
                 {/* Other Sections */}
-                <Section title="Latest shop" items={homeData} bg="bg-green-100" />
-                <Section title="Consumer electronics and gadgets" items={consumerData} bg="bg-blue-100" />
-                <Section title="Offered Products" items={offeredData} bg="bg-pink-100" />
-                <Section title="Popular" items={popular} bg="bg-yellow-100" />
-                <Section title="New Arrivals" items={newArrival} bg="bg-purple-100" />
-                <Section title="Special Offers" items={special} bg="bg-red-100" />
-                <Section title="Top Selling" items={topSell} bg="bg-teal-100" />
+                <Section title="Latest Item" items={homeData} bg="bg-green-100" handleAddToCart={handleAddToCart} />
+                <Section title="Consumer electronics and gadgets" items={consumerData} bg="bg-blue-100" handleAddToCart={handleAddToCart} />
+                <Section title="Offered Products" items={offeredData} bg="bg-pink-100" handleAddToCart={handleAddToCart} />
+                <Section title="Popular" items={popular} bg="bg-yellow-100" handleAddToCart={handleAddToCart} />
+                <Section title="New Arrivals" items={newArrival} bg="bg-purple-100" handleAddToCart={handleAddToCart} />
+                <Section title="Special Offers" items={special} bg="bg-red-100" handleAddToCart={handleAddToCart} />
+                <Section title="Top Selling" items={topSell} bg="bg-teal-100" handleAddToCart={handleAddToCart} />
+
             </div>
 
             {/* Blog Section */}
@@ -239,7 +244,7 @@ const DealsSection = ({ items }) => {
             <div className="flex flex-col sm:flex-row justify-between items-center mb-3 gap-2">
                 <h2 className="font-bold">Deals and offers</h2>
                 <div className="flex gap-2 text-sm font-mono">
-                    {["days","hours","minutes","seconds"].map((unit,i)=>(
+                    {["days", "hours", "minutes", "seconds"].map((unit, i) => (
                         <span
                             key={i}
                             className="relative inline-flex items-center justify-center px-3 py-1.5 rounded-full 
@@ -248,7 +253,7 @@ const DealsSection = ({ items }) => {
                             shadow-lg shadow-pink-500/20 border border-white/20 backdrop-blur-md
                             transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-pink-500/40"
                         >
-                            {String(Object.values(timeLeft)[i]).padStart(2,"0")}{unit[0]}
+                            {String(Object.values(timeLeft)[i]).padStart(2, "0")}{unit[0]}
                         </span>
                     ))}
                 </div>
@@ -272,23 +277,49 @@ const DealsSection = ({ items }) => {
 };
 
 // Generic Section
-const Section = ({ title, items, bg }) => {
+const Section = ({ title, items, bg, handleAddToCart }) => {
     return (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 p-4">
             <div className={`col-span-3 ${bg} rounded-lg shadow flex items-center justify-center py-6`}>
                 <h2 className="font-bold text-lg">{title}</h2>
             </div>
-            <div className="col-span-9 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+            <div className="col-span-9 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
                 {items.map((item, i) => (
-                    <div key={i} className="border rounded-lg p-3 text-center hover:shadow bg-white">
-                        <div className="h-20 bg-gray-100 rounded mb-2 flex items-center justify-center">
-                            <img src={item.image} alt={item.name} className="h-16 object-contain" />
+                    <div
+                        key={i}
+                        className="border rounded-2xl p-4 text-center bg-white shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer"
+                    >
+                        {/* Image Container */}
+                        <div className="h-28 bg-gray-100 rounded-xl mb-3 flex items-center justify-center overflow-hidden">
+                            <img
+                                src={item.image}
+                                alt={item.name}
+                                className="h-20 object-contain transform hover:scale-110 transition duration-300"
+                            />
                         </div>
-                        <h3 className="font-semibold">{item.name}</h3>
-                        {item.price && <p className="text-sm text-gray-500">From {item.price}</p>}
+
+                        {/* Item Name */}
+                        <h3 className="font-semibold text-gray-800 text-sm sm:text-base truncate">
+                            {item.name}
+                        </h3>
+
+                        {/* Price */}
+                        {item.price && (
+                            <p className="text-gray-600 text-sm font-medium mt-1">${item.price}</p>
+                        )}
+
+                        {/* Button */}
+                        <button onClick={() => {
+                            handleAddToCart(item);
+
+                        }}
+                            className="mt-3 w-full py-2 text-sm font-semibold bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-lg hover:from-indigo-600 hover:to-blue-600 transition-all duration-300">
+                            Add to Cart
+                        </button>
                     </div>
                 ))}
             </div>
+
         </div>
     );
 };

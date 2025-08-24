@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion"; 
+import { motion } from "framer-motion";
 import Offerd from "../Offerd";
+import { Link, useOutletContext } from "react-router-dom";
 
 const AllOfferd = () => {
+
+  const { handleAddToCart } = useOutletContext();
   const [offerd, setOfferd] = useState([]);
 
   useEffect(() => {
@@ -58,14 +61,15 @@ const AllOfferd = () => {
               />
               <div className="p-4">
                 <h3 className="font-bold text-lg">{item.name}</h3>
-                <p className="line-through text-gray-500">{item.oldPrice} $</p>
-                <p className="text-yellow-500 text-xl font-bold">{item.newPrice} $</p>
-                <motion.button
+                <p className="line-through text-gray-500">{item.price} $</p>
+                <p className="text-yellow-500 text-xl font-bold">{item.discountPrice} $</p>
+                <Link to={`/details/${item.id}`}>   <motion.button
                   whileHover={{ scale: 1.05 }}
                   className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 mt-3 rounded-lg font-semibold w-full"
                 >
                   MORE
                 </motion.button>
+                </Link>
               </div>
             </motion.div>
           ))}
@@ -73,54 +77,55 @@ const AllOfferd = () => {
       </section>
 
       {/* Offered Section */}
-     <section className="px-9 sm:px-6 lg:px-10 py-8">
-  <motion.h2
-    className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-6 text-center sm:text-left"
-    initial={{ opacity: 0, x: 50 }}
-    whileInView={{ opacity: 1, x: 0 }}
-    transition={{ duration: 0.6 }}
-  >
-    🎉 Special Offers
-  </motion.h2>
+      <section className="px-9 sm:px-6 lg:px-10 py-8">
+        <motion.h2
+          className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-6 text-center sm:text-left"
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          🎉 Special Offers
+        </motion.h2>
 
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-    {offered.map((item, index) => (
-      <motion.div
-        key={index}
-        className="bg-white rounded-lg shadow-lg overflow-hidden text-center relative transform transition-transform hover:scale-105"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: index * 0.1 }}
-      >
-        {item.discount && (
-          <span className="absolute top-2 left-2 bg-red-500 text-white font-bold px-2 sm:px-3 py-1 text-xs sm:text-sm rounded-full">
-            -{item.discount}
-          </span>
-        )}
-        <img
-          src={item.image}
-          alt={item.name}
-          className="w-full h-36 sm:h-40 md:h-44 lg:h-40 xl:h-48 object-contain p-3 sm:p-4"
-        />
-        <div className="p-3 sm:p-4">
-          <h3 className="font-bold text-base sm:text-lg">{item.name}</h3>
-          <p className="line-through text-gray-500 text-sm sm:text-base">
-            {item.oldPrice} $
-          </p>
-          <p className="text-green-600 text-lg sm:text-xl font-bold">
-            {item.newPrice} $
-          </p>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            className="bg-orange-500 hover:bg-orange-600 text-white px-3 sm:px-4 py-2 mt-3 rounded-lg font-semibold w-full text-sm sm:text-base"
-          >
-            MORE
-          </motion.button>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {offered.map((item, index) => (
+            <motion.div
+              key={index}
+              className="bg-white rounded-lg shadow-lg overflow-hidden text-center relative transform transition-transform hover:scale-105"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+            >
+              {item.discount && (
+                <span className="absolute top-2 left-2 bg-red-500 text-white font-bold px-2 sm:px-3 py-1 text-xs sm:text-sm rounded-full">
+                  -{item.discount}
+                </span>
+              )}
+              <img
+                src={item.image}
+                alt={item.name}
+                className="w-full h-36 sm:h-40 md:h-44 lg:h-40 xl:h-48 object-contain p-3 sm:p-4"
+              />
+              <div className="p-3 sm:p-4">
+                <h3 className="font-bold text-base sm:text-lg">{item.name}</h3>
+                <p className="line-through text-gray-500 text-sm sm:text-base">
+                  {item.price} $
+                </p>
+                <p className="text-green-600 text-lg sm:text-xl font-bold">
+                  {item.discountPrice} $
+                </p>
+                <Link to={`/details/${item.id}`}>   <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  className="bg-orange-500 hover:bg-orange-600 text-white px-3 sm:px-4 py-2 mt-3 rounded-lg font-semibold w-full text-sm sm:text-base"
+                >
+                  MORE
+                </motion.button>
+                </Link>
+              </div>
+            </motion.div>
+          ))}
         </div>
-      </motion.div>
-    ))}
-  </div>
-</section>
+      </section>
 
 
       {/* Left-Right Info Section */}
@@ -202,7 +207,12 @@ const AllOfferd = () => {
                 whileHover={{ scale: 1.1 }}
                 className="bg-white text-purple-700 font-semibold px-4 py-2 mt-3 rounded-lg w-full"
               >
-                Buy Now
+                <button onClick={() => {
+                  handleAddToCart(item);
+
+                }}>
+                  Buy Now
+                </button>
               </motion.button>
             </motion.div>
           ))}

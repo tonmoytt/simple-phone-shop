@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { motion } from "framer-motion";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Authmainprovider } from "../Authincation";
 
@@ -10,6 +10,8 @@ const Login = () => {
     const { signInUser } = useContext(Authmainprovider)
     const [errors, seterrors] = useState("")
     const navigate = useNavigate()
+      const location = useLocation();  // ✅ Added this
+    const from = location.state?.from?.pathname || "/";
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -22,7 +24,8 @@ const Login = () => {
                 Swal.fire("Success!", "Login Successful", "success");
                 e.target.reset();
                 seterrors('')
-                navigate("/");
+                navigate(from, { replace: true });
+
             })
             .catch(() => {
                 Swal.fire("Error!", "Email & Password didn't match", "error");
@@ -96,7 +99,7 @@ const Login = () => {
 
                     <button
                         type="submit"
-                        className="w-full py-3 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold shadow-lg hover:scale-105 transition-transform"
+                        className="w-full py-3 cursor-pointer rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold shadow-lg hover:scale-105 transition-transform"
                     >
                         Login
                     </button>

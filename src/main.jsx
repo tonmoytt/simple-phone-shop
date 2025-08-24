@@ -19,6 +19,7 @@ import DealsPage from './Components/Component/Pages/Electronics/Deals/Deals.jsx'
 import Register from './Components/Authincation/AuthProvider/Register/Register.jsx';
 import Login from './Components/Authincation/AuthProvider/Login/Login.jsx';
 import Authincation from './Components/Authincation/AuthProvider/Authincation.jsx';
+import Privetroute from './Components/Authincation/Privetroute/Privetroute.jsx';
 
 const router = createBrowserRouter([
   {
@@ -32,13 +33,13 @@ const router = createBrowserRouter([
       },
       {
         path: '/details/:id',
-        element: <DetailsData></DetailsData>,
+        element:  <Privetroute><DetailsData></DetailsData></Privetroute>  ,
         loader: () => fetch('/Phone.json')
 
       },
       {
         path: '/dashboard',
-        element: <Dashboard></Dashboard>
+        element: <Privetroute><Dashboard></Dashboard></Privetroute> 
       },
       {
         path: '/electronics',

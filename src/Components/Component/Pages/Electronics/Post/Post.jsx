@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SectionTitle from './../../../Phones/SectionTitle/SectionTitle'
+import { Link } from "react-router-dom";
 
 const FashionPage = () => {
   const [items, setItems] = useState([]);
@@ -29,9 +30,9 @@ const FashionPage = () => {
     if (brands.length > 0) filtered = filtered.filter(d => brands.includes(d.brand));
     filtered = filtered.filter(d => d.price <= maxPrice);
 
-    if (sortBy === "low-high") filtered.sort((a,b) => a.price - b.price);
-    else if (sortBy === "high-low") filtered.sort((a,b) => b.price - a.price);
-    else if (sortBy === "newest") filtered.sort((a,b) => new Date(b.releaseDate) - new Date(a.releaseDate));
+    if (sortBy === "low-high") filtered.sort((a, b) => a.price - b.price);
+    else if (sortBy === "high-low") filtered.sort((a, b) => b.price - a.price);
+    else if (sortBy === "newest") filtered.sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate));
 
     setFilteredItems(filtered);
   }, [brands, maxPrice, sortBy, items]);
@@ -126,10 +127,10 @@ const FashionPage = () => {
         <div className="flex flex-wrap items-center gap-4">
           <div>
             <span className="mr-2 font-semibold">Max Price: ${maxPrice}</span>
-            <input type="range" min="100" max="2000" value={maxPrice} onChange={(e)=>setMaxPrice(Number(e.target.value))} className="inline-block w-48" />
+            <input type="range" min="100" max="2000" value={maxPrice} onChange={(e) => setMaxPrice(Number(e.target.value))} className="inline-block w-48" />
           </div>
           <div>
-            <select className="border rounded-lg p-2" onChange={(e)=>setSortBy(e.target.value)}>
+            <select className="border rounded-lg p-2" onChange={(e) => setSortBy(e.target.value)}>
               <option value="default">Default</option>
               <option value="low-high">Price: Low to High</option>
               <option value="high-low">Price: High to Low</option>
@@ -144,15 +145,17 @@ const FashionPage = () => {
         {filteredItems.slice(0, visibleCount).map(item => (
           <div key={item.id} className="relative bg-white rounded-3xl shadow-xl overflow-hidden group transform transition-all hover:-translate-y-2 hover:scale-105 hover:shadow-2xl">
             {item.discount && <span className="absolute top-3 left-3 bg-red-500 text-white px-3 py-1 rounded-xl font-bold z-10">-{item.discount}</span>}
-            <img src={item.image} alt={item.name} className="w-full h-64 sm:h-72 md:h-64 lg:h-60 object-cover transition-transform group-hover:scale-105"/>
+            <img src={item.image} alt={item.name} className="w-full h-64 sm:h-72 md:h-64 lg:h-60 object-cover transition-transform group-hover:scale-105" />
             <div className="p-4">
               <h3 className="font-bold text-lg">{item.name}</h3>
-              <p className="text-gray-400 line-through">{item.oldPrice} $</p>
-              <p className="text-yellow-500 font-bold text-xl">{item.newPrice} $</p>
+              <p className="text-gray-400 line-through">{item.price} $</p>
+              <p className="text-yellow-500 font-bold text-xl">{item.discountPrice} $</p>
             </div>
-            <div className="absolute inset-0 bg-black bg-opacity-20 backdrop-blur-sm flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity space-y-4">
-              <button className="bg-orange-500 px-4 py-2 rounded-lg text-white font-semibold hover:bg-orange-600">Buy Now</button>
-              <button className="bg-white px-3 py-1 rounded-lg text-gray-800 hover:bg-gray-200">Quick View</button>
+            <div className="absolute inset-0 bg-opacity-20 backdrop-blur-sm flex flex-col items-center justify-center opacity-0 group-hover:opacity-90 transition-opacity space-y-4">
+              <Link to={`/details/${item.id}`}>  <button className="bg-orange-500 px-4 py-2 rounded-lg text-white font-semibold hover:bg-orange-600">Buy Now</button>
+              </Link>
+              <Link to={`/details/${item.id}`}>   <button className="bg-white px-3 py-1 rounded-lg text-gray-800 hover:bg-gray-200">Quick View</button>
+              </Link>
             </div>
           </div>
         ))}

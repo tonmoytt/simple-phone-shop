@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { Link, useOutletContext } from "react-router-dom";
 
 const AnotherPhones = () => {
   const [phones, setPhones] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [phonesPerPage] = useState(4); // এক পেজে 4 ফোন দেখাবে
+
+      const { handleAddToCart } = useOutletContext();    //context 
 
   useEffect(() => {
     fetch("/Phone.json")
@@ -24,7 +27,7 @@ const AnotherPhones = () => {
 
   const totalPages = Math.ceil(
     phones.filter((phone) => phone.category !== "special").length /
-      phonesPerPage
+    phonesPerPage
   );
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -52,9 +55,10 @@ const AnotherPhones = () => {
                 <p className="text-purple-500 font-bold text-xl mt-2">
                   ${phone.price}
                 </p>
-                <button className="mt-4 px-6 py-2 bg-purple-500 text-white font-semibold rounded-lg shadow-md hover:bg-purple-600 transition">
+                <Link to={`/details/${phone.id}`}> <button className="mt-4 px-6 py-2 cursor-pointer bg-purple-500 text-white font-semibold rounded-lg shadow-md hover:bg-purple-600 transition">
                   Buy Now
                 </button>
+                </Link>
               </div>
             ))}
           </div>
@@ -63,9 +67,9 @@ const AnotherPhones = () => {
 
       {/* All Phones Pagination Section */}
       <div>
-       <h2 className="text-3xl sm:text-4xl font-extrabold mb-6 ">
-  📱 Make Purchase
-</h2>
+        <h2 className="text-3xl sm:text-4xl font-extrabold mb-6 ">
+          📱 Make Purchase
+        </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           {currentPhones.map((phone) => (
@@ -82,7 +86,10 @@ const AnotherPhones = () => {
               <p className="text-purple-500 font-bold text-lg mt-2">
                 ${phone.price}
               </p>
-              <button className="mt-3 px-5 py-2 bg-gradient-to-r from-purple-400 to-pink-500 text-white font-semibold rounded-lg shadow-md hover:from-pink-500 hover:to-purple-400 transition">
+              <button  onClick={() => {
+                                handleAddToCart(phone);
+                                
+                            }} className="mt-3 px-5 py-2 bg-gradient-to-r from-purple-400 to-pink-500 text-white font-semibold rounded-lg shadow-md hover:from-pink-500 hover:to-purple-400 transition">
                 Add to Cart
               </button>
             </div>
@@ -95,11 +102,10 @@ const AnotherPhones = () => {
             <button
               key={i + 1}
               onClick={() => paginate(i + 1)}
-              className={`px-5 py-2 rounded-lg font-medium ${
-                currentPage === i + 1
+              className={`px-5 py-2 rounded-lg font-medium ${currentPage === i + 1
                   ? "bg-purple-600 text-white shadow-lg"
                   : "bg-gray-200 text-gray-700 hover:bg-gray-300 transition"
-              }`}
+                }`}
             >
               {i + 1}
             </button>

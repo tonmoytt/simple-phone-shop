@@ -6,6 +6,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Post from './../Electronics/Post/Post';
+import { Link } from "react-router-dom";
 
 const metrics = [
   { label: "Free Shipping", desc: "Free shipping on order", icon: "🚚" },
@@ -33,9 +34,9 @@ const popularProducts = [
 ];
 
 const bestProductGallery = [
-  "https://picsum.photos/seed/watch-hero-1/600/500",
-  "https://picsum.photos/seed/watch-hero-2/600/500",
-  "https://picsum.photos/seed/watch-hero-3/600/500",
+  "https://i.ibb.co.com/zWbk7cNX/download.jpg",
+  "https://i.ibb.co/C3ppN4tP/1p.jpg",
+  "https://i.ibb.co/FqwYZJTv/1l.jpg ",
 ];
 
 const SaleCard = () => (
@@ -50,12 +51,14 @@ const SaleCard = () => (
     <div className="grid md:grid-cols-2 gap-6 items-center relative z-10">
       <div>
         <h3 className="text-2xl md:text-3xl font-bold mb-3">
-          Sale up to <span className="text-orange-500">30% OFF</span>
+          Shop up to <span className="text-orange-500">30% OFF</span>
         </h3>
         <p className="text-gray-600 mb-6">Compact Camera • Limited time offer</p>
-        <button className="px-5 py-3 rounded-xl bg-orange-500 text-white font-semibold shadow hover:bg-orange-600 transition w-full md:w-auto">
+        <Link to='/offers'>  <button className="px-5 py-3 rounded-xl bg-orange-500 text-white font-semibold shadow hover:bg-orange-600 transition w-full md:w-auto">
+
           Shop Now
         </button>
+        </Link>
       </div>
       <motion.img
         whileHover={{ scale: 1.05 }}
@@ -75,7 +78,7 @@ const fadeUp = {
 export default function GshopStyleLanding() {
   return (
     <div className="pt-10 min-h-screen bg-gradient-to-r from-indigo-300 via-purple-500 to-pink-500 text-gray-900">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-8xl mx-auto px-2">
 
         {/* Banner Section */}
         <motion.section variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }} className="py-10 md:py-16">
@@ -190,7 +193,7 @@ export default function GshopStyleLanding() {
                         <li key={idx}>{f}</li>
                       ))}
                     </ul>
-                    <button
+                    <Link to={`/details/${item.id}`}>   <button
                       className="
                 px-5 py-3 rounded-xl bg-orange-500 
                 text-white font-semibold shadow 
@@ -200,6 +203,7 @@ export default function GshopStyleLanding() {
                     >
                       Buy Now
                     </button>
+                    </Link>
                   </div>
                 </div>
               </SwiperSlide>
@@ -230,19 +234,35 @@ export default function GshopStyleLanding() {
             {popularProducts.map((p) => (
               <SwiperSlide key={p.id}>
                 <div className="bg-gradient-to-r from-white via-orange-50 to-orange-100 p-4 rounded-2xl shadow-sm border hover:shadow-md transition grid gap-3">
-                  <img src={p.image} alt={p.name} className="w-full h-auto rounded-lg object-cover aspect-video" />
-                  <div>
-                    <p className="text-sm text-gray-500">Gadgets</p>
-                    <h3 className="font-semibold">{p.name}</h3>
-                    <div className="flex items-center justify-between mt-2">
-                      <span className="font-bold">${p.price.toFixed(2)}</span>
-                      <span className="text-sm text-gray-500">★ {p.rating}</span>
+                  <Link to={`/details/${p.id}`}>
+                    <div className="relative ml-auto cursor-pointer">
+                      <div
+                        className="tooltip tooltip-bottom tooltip-success"
+                        data-tip="Click & Get Details"
+                      >
+                        <img
+                          src={p.image}
+                          alt={p.name}
+                          className="w-full h-auto rounded-lg object-cover aspect-video"
+                        />
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-500">Gadgets</p>
+                        <h3 className="font-semibold">{p.name}</h3>
+                        <div className="flex items-center justify-between mt-2">
+                          <span className="font-bold">${p.price.toFixed(2)}</span>
+                          <span className="text-sm text-gray-500">★ {p.rating}</span>
+                        </div>
+                      </div>
                     </div>
-                  </div>
+
+                  </Link>
                 </div>
               </SwiperSlide>
+
             ))}
           </Swiper>
+
         </section>
 
         {/* Best Product */}
@@ -252,7 +272,8 @@ export default function GshopStyleLanding() {
               <Swiper modules={[Navigation, Pagination, Autoplay]} spaceBetween={12} slidesPerView={1} navigation pagination={{ clickable: true }} autoplay={{ delay: 2600 }} className="rounded-xl overflow-hidden">
                 {bestProductGallery.map((src, idx) => (
                   <SwiperSlide key={idx}>
-                    <img src={src} alt={`best product ${idx + 1}`} className="w-full h-[300px] md:h-[400px] object-cover rounded-xl" />
+                  <Link to={`/details/${idx}`}> <img src={src} alt={`best product ${idx + 1}`} className="w-full h-[300px] md:h-[400px]  rounded-xl" />
+                  </Link> 
                   </SwiperSlide>
                 ))}
               </Swiper>
@@ -260,7 +281,8 @@ export default function GshopStyleLanding() {
             <div>
               <h2 className="text-2xl md:text-3xl font-bold mb-4">The best product for your best time</h2>
               <p className="text-gray-600 mb-6">Premium sport watch featuring GPS, heart-rate monitor, and vivid AMOLED display. Replace the left gallery with your live product images.</p>
-              <button className="px-5 py-3 rounded-xl bg-orange-500 text-white font-semibold shadow hover:bg-orange-600 transition">Explore Now</button>
+              <Link to='/fashion'> <button className="px-5 py-3 rounded-xl bg-orange-500 text-white font-semibold shadow hover:bg-orange-600 transition">Explore Now</button>
+              </Link>
             </div>
           </div>
         </section>
@@ -271,6 +293,6 @@ export default function GshopStyleLanding() {
         </section>
 
       </div>
-    </div>
+    </div >
   );
 }

@@ -5,6 +5,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const SectionTitle = ({ title, subtitle }) => (
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
@@ -14,26 +15,31 @@ const SectionTitle = ({ title, subtitle }) => (
 );
 
 const DealCard = ({ item }) => (
+
   <div className="group relative rounded-3xl overflow-hidden bg-white shadow-md hover:shadow-2xl transform transition duration-500 hover:scale-105 border border-gray-100">
-    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl">
-      <img
-        src={item.image}
-        alt={item.name}
-        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl"></div>
-    </div>
-    <div className="mt-3 px-3 pb-3 space-y-1">
-      <h3 className="font-semibold text-gray-900 line-clamp-1">{item.name}</h3>
-      <p className="text-sm text-gray-500 line-clamp-2">{item.about}</p>
-      <div className="flex items-center justify-between pt-2">
-        <span className="font-bold">${item.price}</span>
-        <span className="text-xs px-2 py-1 rounded-full bg-orange-50 text-orange-600 border border-orange-100">
-          {item.category}
-        </span>
+    <Link to={`/details/${item.id}`}>
+      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl p-4">
+        <img
+          src={item.image}
+          alt={item.name}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 rounded-b-xl"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl"></div>
       </div>
-    </div>
+      <div className="mt-3 px-3 pb-3 space-y-1">
+        <h3 className="font-semibold text-gray-900 line-clamp-1">{item.name}</h3>
+        <div className="flex items-center justify-between px-2">
+          <span className="font-bold justify-center flex">${item.price}</span>
+          <button className="mt-3 w-1/2 py-2 text-sm font-semibold bg-gradient-to-r from-blue-500 to-indigo-500 text-white rounded-lg hover:from-indigo-600 hover:to-blue-600 transition-all duration-300 cursor-pointer">About</button>
+        </div>
+
+
+
+
+      </div>
+    </Link>
   </div>
+
 );
 
 const Deals = () => {
@@ -81,13 +87,13 @@ const Deals = () => {
     );
   };
 
-  const latestFiltered = useMemo(() => 
+  const latestFiltered = useMemo(() =>
     deals
       .filter(d => selectedDevice ? d.device === selectedDevice : true)
       .filter(matchesSearch)
-  , [deals, selectedDevice, search]);
+    , [deals, selectedDevice, search]);
 
-  const featuredFiltered = useMemo(() => 
+  const featuredFiltered = useMemo(() =>
     deals
       .filter(d => {
         const { type, value } = featFilter;
@@ -96,7 +102,7 @@ const Deals = () => {
         return false;
       })
       .filter(matchesSearch)
-  , [deals, featFilter, search]);
+    , [deals, featFilter, search]);
 
   return (
     <div className="mt-24 min-h-screen bg-white">
@@ -122,31 +128,31 @@ const Deals = () => {
           />
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-                    <div className="grid md:grid-cols-2 gap-8 items-center">
-                        <div>
-                            <h1 className="text-white text-3xl md:text-5xl font-extrabold drop-shadow-sm">Find Daily Deals</h1>
-                            <p className="mt-3 text-white/90 max-w-xl">
-                                Get the best coupons and exclusive daily deals from over 100+ brands. Start shopping today.
-                            </p>
-                            <div className="mt-6">
-                                <div className="flex items-center bg-white rounded-full shadow-sm p-1">
-                                    <input
-                                        value={search}
-                                        onChange={(e) => setSearch(e.target.value)}
-                                        placeholder="Search deals"
-                                        className="flex-1 px-4 py-3 rounded-full outline-none"
-                                    />
-                                    <button className="px-5 py-2.5 rounded-full bg-rose-500 text-white font-semibold hover:opacity-95">Search</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="hidden md:flex justify-center">
-                            <div className="relative h-72 w-72 rounded-full bg-white/20 flex items-center justify-center shadow-xl">
-                                <div className="h-64 w-64 rounded-full bg-white/90 flex items-center justify-center text-6xl">🛍️</div>
-                            </div>
-                        </div>
-                    </div>
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <h1 className="text-white text-3xl md:text-5xl font-extrabold drop-shadow-sm">Find Daily Deals</h1>
+              <p className="mt-3 text-white/90 max-w-xl">
+                Get the best coupons and exclusive daily deals from over 100+ brands. Start shopping today.
+              </p>
+              <div className="mt-6">
+                <div className="flex items-center bg-white rounded-full shadow-sm p-1">
+                  <input
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    placeholder="Search deals"
+                    className="flex-1 px-4 py-3 rounded-full outline-none"
+                  />
+                  <button className="px-5 py-2.5 rounded-full bg-rose-500 text-white font-semibold hover:opacity-95">Search</button>
                 </div>
+              </div>
+            </div>
+            <div className="hidden md:flex justify-center">
+              <div className="relative h-72 w-72 rounded-full bg-white/20 flex items-center justify-center shadow-xl">
+                <div className="h-64 w-64 rounded-full bg-white/90 flex items-center justify-center text-6xl">🛍️</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </header>
 
       {/* Latest Deals */}

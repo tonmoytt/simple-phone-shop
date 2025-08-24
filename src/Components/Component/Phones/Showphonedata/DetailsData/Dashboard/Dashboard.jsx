@@ -29,7 +29,7 @@ const Dashboard = () => {
                   <div
                     onClick={() => Handledeleteditems(item.id)}
                     className="ml-auto tooltip tooltip-left cursor-pointer"
-                    data-tip="Will be deleted"
+                    data-tip="Deleted Now"
                   >
                     <MdClose className="text-red-600 btn" />
                   </div>
