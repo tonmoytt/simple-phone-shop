@@ -20,6 +20,12 @@ import Register from './Components/Authincation/AuthProvider/Register/Register.j
 import Login from './Components/Authincation/AuthProvider/Login/Login.jsx';
 import Authincation from './Components/Authincation/AuthProvider/Authincation.jsx';
 import Privetroute from './Components/Authincation/Privetroute/Privetroute.jsx';
+import CheckoutPage from './Components/Component/Phones/Showphonedata/DetailsData/Dashboard/CheckoutPage/CheckoutPage.jsx';
+import PaymentPage from './Components/Component/Phones/Showphonedata/DetailsData/Dashboard/PaymentPage/PaymentPage.jsx';
+import NewProduct from './Components/Component/Pages/Electronics/Cetagoryspages/NewProduct/NewProduct.jsx';
+import Overall from './Components/Component/Pages/Electronics/Cetagoryspages/Overall/Overall.jsx';
+import FaqPage from './Components/Component/Pages/Electronics/Cetagoryspages/FaqPage/FaqPage.jsx';
+import ShopMap from './Components/Component/Pages/Electronics/Cetagoryspages/shopMap/ShopMap.jsx';
 
 const router = createBrowserRouter([
   {
@@ -68,6 +74,30 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <Login></Login>
+      },
+      {
+        path: '/CheckoutPage',
+        element: <CheckoutPage></CheckoutPage>
+      },
+      {
+        path: '/payment',
+        element: <PaymentPage></PaymentPage>
+      },
+      {
+        path: '/newproducts',
+        element: <NewProduct></NewProduct>
+      },
+      {
+        path: '/overall',
+        element: <Overall></Overall>
+      },
+      {
+        path: '/faq',
+        element: <FaqPage></FaqPage>
+      },
+      {
+        path: '/map',
+        element: <ShopMap></ShopMap>
       },
 
     ]

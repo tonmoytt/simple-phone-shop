@@ -147,7 +147,7 @@ const Navbar = ({ cartCount = 0, Wishlist = 0 }) => {
                   className="absolute top-full mt-7 w-60  text-white bg-gray-800 shadow-2xl shadow-cyan-300 rounded-xl overflow-hidden z-50 space-y-3"
                 >
                   <Link
-                    to="/new"
+                    to="/newproducts"
                     className="flex items-center gap-2 text-base px-4 py-2 hover:bg-indigo-100"
                   >
                     <FaTshirt /> New Products
